@@ -21,9 +21,10 @@ public class IServiceImpl<T> implements IService<T> {
         return mapper.deleteByPrimaryKey(key);
     }
 
+    //删除是逻辑删除，根据传入id的值，生成动态更新   字段为del_flag  删除为1
     @Override
     public int delete(T t) {
-        return mapper.delete(t);
+        return mapper.updateByPrimaryKeySelective(t);
     }
 
     @Override

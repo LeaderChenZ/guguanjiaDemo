@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <script>
-   /* //获取主机地址之后的目录，如： uimcardprj/share/meun.html
-    var pathName = window.document.location.pathname;
-    var path = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);*/
+    /* //获取主机地址之后的目录，如： uimcardprj/share/meun.html
+     var pathName = window.document.location.pathname;
+     var path = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);*/
 </script>
 <head>
     <base href="/guguanjia/">
@@ -776,10 +776,18 @@
                                             </div>
                                             <div>
                                                 <div class="pagination no-margin pull-right clearfix">
-                                                    <li class="prev"><a href="javascript:void(0);" @click="selectAll(1,pageInfo.pageSize)">首页</a>
+                                                    <li class="prev"><a href="javascript:void(0);"
+                                                                        @click="selectAll(1,pageInfo.pageSize)">首页</a>
                                                     </li>
 
-                                                    <li :class="pageInfo.preNum==1?'prev disabled':'prev'"><a href="javascript:void(0);" @click="selectAll(pageInfo.prePage,pageInfo.pageSize)">上一页</a>
+                                                    <li v-if="pageInfo.pageNum>1"
+                                                        :class="pageInfo.preNum==1?'prev disabled':'prev'"><a
+                                                            href="javascript:void(0);"
+                                                            @click="selectAll(pageInfo.prePage,pageInfo.pageSize)">上一页</a>
+                                                    </li>
+                                                    <li v-else-if="pageInfo.pageNum<=1"
+                                                        :class="pageInfo.preNum==1?'prev disabled':'prev'"><a
+                                                            href="javascript:void(0);">上一页</a>
                                                     </li>
 
                                                     <li :class="num==pageInfo.pageNum?'active':''"
@@ -789,10 +797,18 @@
                                                     </li>
                                                     <!--<li :class="num==pageInfo.pageNum?'active':''"  v-for="num in pageInfo.navigatepageNums"><a href="javascript:void(0);" @click="selectAll(num,pageInfo.pageSize)">{{num}}</a></li>-->
 
-                                                    <li :class="pageInfo.pageNum==pageInfo.pages?'next disabled':'next'"><a href="javascript:void(0);" @click="selectAll(pageInfo.nextPage,pageInfo.pageSize)">下一页</a>
+                                                    <li v-if="pageInfo.pageNum<pageInfo.pages"
+                                                        :class="pageInfo.pageNum==pageInfo.pages?'next disabled':'next'">
+                                                        <a href="javascript:void(0);"
+                                                           @click="selectAll(pageInfo.nextPage,pageInfo.pageSize)">下一页</a>
+                                                    </li>
+                                                    <li v-else-if="pageInfo.pageNum>=pageInfo.pages"
+                                                        :class="pageInfo.pageNum==pageInfo.pages?'next disabled':'next'">
+                                                        <a href="javascript:void(0);">下一页</a>
                                                     </li>
 
-                                                    <li class="next"><a href="javascript:void(0);" @click="selectAll(pageInfo.pages,pageInfo.pageSize)">尾页</a>
+                                                    <li class="next"><a href="javascript:void(0);"
+                                                                        @click="selectAll(pageInfo.pages,pageInfo.pageSize)">尾页</a>
                                                     </li>
                                                 </div>
 
@@ -918,7 +934,6 @@
     <!-- ace scripts -->
     <script src="static/ace/js/ace-elements.min.js"></script>
     <script src="static/ace/js/ace.min.js"></script>
-
 
 
     <!-- 引入其他js -->

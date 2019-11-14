@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 
 /**
  * @author Chen
@@ -44,6 +46,23 @@ public class AppVersionController {
         if (i>0){
                 result.setMsg("操作成功！");
                 result.setSuccess(true);
+        }
+        return result;
+    }
+
+    @RequestMapping("doDelete")
+    @ResponseBody
+    public Result doDelete(Long id){
+            AppVersion appVersion = new AppVersion();
+            appVersion.setId(id);
+            appVersion.setDelFlag("1");
+            appVersion.setUpdateDate(new Date());
+            //逻辑删除  动态更新
+        int i = service.delete(appVersion);
+        Result result = new Result();
+        if (i>0){
+            result.setMsg("操作成功！");
+            result.setSuccess(true);
         }
         return result;
     }

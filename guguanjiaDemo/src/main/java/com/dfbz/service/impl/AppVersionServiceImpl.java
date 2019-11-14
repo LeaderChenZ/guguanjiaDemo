@@ -23,7 +23,10 @@ public class AppVersionServiceImpl extends IServiceImpl<AppVersion> implements A
         PageHelper.startPage(pageNum, pageSize);//开启分页拦截功能
 
 
-        List<AppVersion> appVersions = mapper.selectAll();//自动分页
+//        List<AppVersion> appVersions = mapper.selectAll();//自动分页
+        AppVersion appVersion = new AppVersion();
+        appVersion.setDelFlag("0");
+        List<AppVersion> appVersions = mapper.select(appVersion);
         PageInfo<AppVersion> pageInfo = new PageInfo<>(appVersions);//生成分页对象
         return pageInfo;
     }
