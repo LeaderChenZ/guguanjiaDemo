@@ -3,6 +3,7 @@ package com.dfbz.entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Table(name = "qualification")
@@ -45,6 +46,28 @@ public class Qualification {
 
     @Column(name = "create_by")
     private String createBy;
+
+    //自动生成的sql中忽略该属性
+    @Transient
+    private String  uploadUserName;
+    @Transient
+    private String checkUserName;
+
+    public String getUploadUserName() {
+        return uploadUserName;
+    }
+
+    public void setUploadUserName(String uploadUserName) {
+        this.uploadUserName = uploadUserName;
+    }
+
+    public String getCheckUserName() {
+        return checkUserName;
+    }
+
+    public void setCheckUserName(String checkUserName) {
+        this.checkUserName = checkUserName;
+    }
 
     /**
      * @return id

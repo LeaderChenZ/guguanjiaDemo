@@ -46,6 +46,27 @@ AND
 AND
 	DATE(update_date)<'2019-11-14'
 
+#考核管理列表展示    根据条件动态查询列表
+#1.查询所有
+select ex.*,su.name userName,so.name officeName from
+	examine ex , sys_user su , sys_office so
+where
+	ex.examine_user_id=su.id
+and
+	su.office_id=so.id
 
+#2.根据条件查询
+select ex.*,su.name userName,so.name officeName from
+	examine ex , sys_user su , sys_office so
+where
+	ex.examine_user_id=su.id
+and
+	su.office_id=so.id
+and
+	so.id=56
+and
+	su.name like concat('%','工作','%')
+and
+	ex.type=1
 
 
