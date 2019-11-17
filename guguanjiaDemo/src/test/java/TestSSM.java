@@ -3,6 +3,7 @@ import com.dfbz.config.SpringMybatis;
 import com.dfbz.dao.AppVersionMapper;
 import com.dfbz.entity.AppVersion;
 import com.dfbz.service.AppVersionService;
+import com.dfbz.util.DateUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -51,9 +52,23 @@ public class TestSSM {
         System.out.println(pageInfo.getList());
     }
     @Test
-    public void test02(){
-        AppVersion appVersion = service.selectByPrimaryKey(1);
-        System.out.println(appVersion);
+    public void test02() throws Exception{
+        /*AppVersion appVersion = service.selectByPrimaryKey(1);
+        System.out.println(appVersion);*/
+        AppVersion app = new AppVersion();
+        app.setDelFlag("0");
+        app.setUpdateDate(DateUtils.getToDate());
+        app.setCreateDate(DateUtils.getToDate());
+        app.setCreateBy("2,超级管理员");
+
+        app.setPlatform(1);
+        app.setForceUpdate(1);
+        app.setVersionNo("1.5.7");
+        app.setDownPath("121515115");
+        app.setSize(156F);
+        app.setAppExplain("优化界面");
+        int insert = service.insert(app);
+
     }
 
 

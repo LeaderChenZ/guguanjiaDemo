@@ -73,6 +73,17 @@ let vm = new Vue({
                 }
             })
 
+        },
+        doInsert:function (appVersion) {
+            axios({
+                url:'manager/app/doInsert',
+                method: "post",
+                data: this.appVersion
+            }).then(response =>{
+
+            }).catch(function (error) {
+                layer.msg(error);
+            });
         }
     },
     created: function () {
