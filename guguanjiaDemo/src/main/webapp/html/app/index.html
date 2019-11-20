@@ -820,36 +820,36 @@
                                     <form action="app/save" method="post" id="app-save-form">
                                         <div class="center padding-10">
                                             <label>系统平台：</label>
-                                            <select name="platform" class="width-50" datatype="*" nullmsg="请选择系统平台！">
+                                            <select name="platform" class="width-50" v-model="appVersion.platform" datatype="*" nullmsg="请选择系统平台！">
                                                 <option value="0" selected>Android</option>
                                                 <option value="1">IOS</option>
                                             </select>
                                         </div>
                                         <div class="center padding-10">
                                             <label>是否强制更新：</label>
-                                            <select name="platform" class="width-50" datatype="*" nullmsg="请选择是否强制更新！">
+                                            <select name="platform" class="width-50" v-model="appVersion.forceUpdate" datatype="*" nullmsg="请选择是否强制更新！">
                                                 <option value="0" selected>否</option>
                                                 <option value="1">是</option>
                                             </select>
                                         </div>
                                         <div class="center padding-10">
                                             <label>版本号：</label>
-                                            <input type="text" class="width-50" name="versionNo" datatype="*"
+                                            <input type="text" class="width-50"  v-model="appVersion.versionNo" name="versionNo" datatype="*"
                                                    nullmsg="请输入版本号"/>
                                         </div>
                                         <div class="center padding-10">
                                             <label>下载地址：</label>
-                                            <input type="text" class="width-50" name="downPath" datatype="*"
+                                            <input type="text" class="width-50" v-model="appVersion.downPath" name="downPath" datatype="*"
                                                    nullmsg="请输入下载地址！"/>
                                         </div>
                                         <div class="center padding-10">
                                             <label>应用大小：</label>
-                                            <input type="text" class="width-50" name="size" datatype="*"
+                                            <input type="text" class="width-50"v-model="appVersion.size" name="size" datatype="*"
                                                    nulmsg="请输入应用大小，单位MB"/>
                                         </div>
                                         <div class="center padding-10">
                                             <label style="vertical-align: top;">版本说明：</label>
-                                            <textarea type="text" class="width-50" name="appExplain"></textarea>
+                                            <textarea type="text" class="width-50" v-model="appVersion.appExplain" name="appExplain"></textarea>
                                         </div>
                                         <div class="margin-t15">
                                             <span class="btn btn-info btn-block bigger-120" @click="doInsert"  id="app-save-btn">保 存</span>
@@ -904,23 +904,23 @@
     $(function () {
 
 
-        $("#app-save-btn").click(function () {
+        /*$("#app-save-btn").click(function () {
             if ("true" == "true") {
 
             }
             sysuserForm.submitForm(false);
             return false;
-        });
+        });*/
 
         $("#app-save-form-cancel").click(function () {
             layer.closeAll();
             return false;
         });
 
-        $("#app-save-form input,#app-save-form textarea").blur(function () {
+        /*$("#app-save-form input,#app-save-form textarea").blur(function () {
             layer.closeTips();
             return false;
-        })
+        })*/
 
 
     });

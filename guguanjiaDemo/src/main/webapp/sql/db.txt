@@ -46,6 +46,7 @@ AND
 AND
 	DATE(update_date)<'2019-11-14'
 
+
 #考核管理列表展示    根据条件动态查询列表
 #1.查询所有
 select ex.*,su.name userName,so.name officeName from
@@ -68,5 +69,203 @@ and
 	su.name like concat('%','工作','%')
 and
 	ex.type=1
+
+
+#根据发起公司或运输公司或处置公司作为条件1、发起时间作为条件2、工单状态作为条件3实现动态查询工单信息
+
+1.不看条件查询所有信息
+
+select *
+from
+	work_order wo
+left join
+	sys_user cu
+on
+	wo.create_user_id=cu.id			#关联工单和发起工单用户
+left join
+	sys_user tu
+on
+	wo.transport_user_id=tu.id	#关联工单和转运用户
+left join
+	sys_user ru
+on
+	wo.recipient_user_id=ru.id	#关联工单和处理工单用户
+left join
+	sys_office co
+on
+	cu.office_id=co.id  			#关联创建工单用户和创建工单用户企业
+left join
+	sys_office toffice
+on
+	tu.office_id=toffice.id				#关联转运用户和转运用户企业
+left join
+	sys_office ro
+on
+	ru.office_id=ro.id				#关联处置用户和处置用户企业
+
+#2.查询需要的数据字段
+
+
+	select wo.* ,cu.name createName,tu.name transportName,ru.name recipientName,co.name createOfficeName
+from
+	work_order wo
+left join
+	sys_user cu
+on
+	wo.create_user_id=cu.id			#关联工单和发起工单用户
+left join
+	sys_user tu
+on
+	wo.transport_user_id=tu.id	#关联工单和转运用户
+left join
+	sys_user ru
+on
+	wo.recipient_user_id=ru.id	#关联工单和处理工单用户
+left join
+	sys_office co
+on
+	cu.office_id=co.id  			#关联创建工单用户和创建工单用户企业
+left join
+	sys_office toffice
+on
+	tu.office_id=toffice.id				#关联转运用户和转运用户企业
+left join
+	sys_office ro
+on
+	ru.office_id=ro.id				#关联处置用户和处置用户企业
+
+
+#3,根据条件查询
+
+select wo.* ,cu.name createName,tu.name transportName,ru.name recipientName,co.name createOfficeName
+from
+	work_order wo
+left join
+	sys_user cu
+on
+	wo.create_user_id=cu.id			#关联工单和发起工单用户
+left join
+	sys_user tu
+on
+	wo.transport_user_id=tu.id	#关联工单和转运用户
+left join
+	sys_user ru
+on
+	wo.recipient_user_id=ru.id	#关联工单和处理工单用户
+left join
+	sys_office co
+on
+	cu.office_id=co.id  			#关联创建工单用户和创建工单用户企业
+left join
+	sys_office toffice
+on
+	tu.office_id=toffice.id				#关联转运用户和转运用户企业
+left join
+	sys_office ro
+on
+	ru.office_id=ro.id				#关联处置用户和处置用户企业
+where
+	wo.del_flag=0
+and
+	wo.status=2
+and
+	wo.create_date > '2016-09-20'
+and
+	wo.create_date < '2017-03-01'
+and
+	(
+	co.name='重庆市利特环保工程有限公司（黑石子）'
+	or
+	toffice.name='重庆市利特环保工程有限公司（黑石子）'
+	or
+	ro.name='重庆市利特环保工程有限公司（黑石子）'
+	)
+
+
+
+#查询order详单功能
+#1.根据id查询order、用户、公司信息
+select wo.* ,cu.name createName,cu.phone createPhone,tu.name transportName,tu.phone transportPhone,ru.name recipientName,ru.phone recipientPhone ,co.name createOfficeName,toffice.name transportOfficeName,ro.name recipientOfficeName
+from
+	work_order wo
+left join
+	sys_user cu
+on
+	wo.create_user_id=cu.id			#关联工单和发起工单用户
+left join
+	sys_user tu
+on
+	wo.transport_user_id=tu.id	#关联工单和转运用户
+left join
+	sys_user ru
+on
+	wo.recipient_user_id=ru.id	#关联工单和处理工单用户
+left join
+	sys_office co
+on
+	cu.office_id=co.id  			#关联创建工单用户和创建工单用户企业
+left join
+	sys_office toffice
+on
+	tu.office_id=toffice.id				#关联转运用户和转运用户企业
+left join
+	sys_office ro
+on
+	ru.office_id=ro.id				#关联处置用户和处置用户企业
+where
+	wo.del_flag=0
+and
+	wo.id=11
+
+
+#2.根据order的id查询detail、waste、waste_type
+#2.1 根据条件查询所有信息
+select *
+from
+	detail de,waste wa,waste_type wt
+where
+	de.work_order_id=11
+and
+	de.waste_type_id=wt.id
+and
+	de.waste_id=wa.id
+
+# 2.2过滤投影结果
+select
+	de.*,wa.code wasteCode,wt.name,wt.code
+from
+	detail de,waste wa,waste_type wt
+where
+	de.work_order_id=11
+and
+	de.waste_type_id=wt.id
+and
+	de.waste_id=wa.id
+
+
+
+#3.根据order的id查询transfer和转运用户名,根据创建时间倒序排列
+select
+	*
+from
+	transfer tr,sys_user su
+where
+	tr.work_order_id=11
+and
+	tr.oprate_user_id=su.id
+order by
+	tr.create_date desc
+
+#3.2 过滤投影数据
+select
+	tr.*,su.name
+from
+	transfer tr,sys_user su
+where
+	tr.work_order_id=11
+and
+	tr.oprate_user_id=su.id
+order by
+	tr.create_date desc
 
 

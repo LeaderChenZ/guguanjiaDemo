@@ -5,7 +5,14 @@ let vm = new Vue({
             pageNum: 1,//默认值
             pageSize: 5
         },
-        appVersion: ''
+        appVersion: {
+            platform: 1,
+            forceUpdate: 1,
+            versionNo: '',
+            downPath: '',
+            size: 156,
+            appExplain: ''
+        }
     },
     methods: {
         selectAll: function (pageNum, pageSize) {
@@ -74,13 +81,25 @@ let vm = new Vue({
             })
 
         },
-        doInsert:function (appVersion) {
+        doInsert: function () {
             axios({
-                url:'manager/app/doInsert',
+                url: 'manager/app/doInsert',
                 method: "post",
                 data: this.appVersion
-            }).then(response =>{
-
+            }).then(response => {
+                layer.msg(response.data.msg)
+                //删除成功则刷新数据
+                if (response.data.success) {
+                    this.appVersion={
+                        platform: 1,
+                        forceUpdate: 1,
+                        versionNo: '',
+                        downPath: '',
+                        size: '',
+                        appExplain: ''
+                    }
+                    this.selectAll(this.pageInfo.pageNum, this.pageInfo.pageInfo.pageSize)
+                }
             }).catch(function (error) {
                 layer.msg(error);
             });

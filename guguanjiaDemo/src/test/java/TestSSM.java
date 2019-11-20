@@ -3,7 +3,6 @@ import com.dfbz.config.SpringMybatis;
 import com.dfbz.dao.AppVersionMapper;
 import com.dfbz.entity.AppVersion;
 import com.dfbz.service.AppVersionService;
-import com.dfbz.util.DateUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -57,8 +57,8 @@ public class TestSSM {
         System.out.println(appVersion);*/
         AppVersion app = new AppVersion();
         app.setDelFlag("0");
-        app.setUpdateDate(DateUtils.getToDate());
-        app.setCreateDate(DateUtils.getToDate());
+        app.setUpdateDate(new Date());
+        app.setCreateDate(new Date());
         app.setCreateBy("2,超级管理员");
 
         app.setPlatform(1);

@@ -3,7 +3,6 @@ package com.dfbz.controller;
 import com.dfbz.entity.AppVersion;
 import com.dfbz.entity.Result;
 import com.dfbz.service.AppVersionService;
-import com.dfbz.util.DateUtils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,12 +70,12 @@ public class AppVersionController {
 
     @RequestMapping("doInsert")
     @ResponseBody
-    public Result doInsert(AppVersion appVersion) throws Exception{
-        AppVersion app = new AppVersion();
-        app.setDelFlag("0");
-        app.setUpdateDate(DateUtils.getToDate());
-        app.setCreateDate(DateUtils.getToDate());
-        app.setCreateBy("2,超级管理员");
+    public Result doInsert(@RequestBody AppVersion appVersion){
+
+        appVersion.setDelFlag("0");
+        appVersion.setUpdateDate(new Date());
+        appVersion.setCreateDate(new Date());
+        appVersion.setCreateBy("2,超级管理员");
         int insert = service.insert(appVersion);
         Result result = new Result();
         if (insert>0){
