@@ -1,8 +1,12 @@
 package com.dfbz.entity;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Table(name = "sys_area")
@@ -25,6 +29,29 @@ public class SysArea {
     @Column(name = "parent_ids")
     private String parentIds;
 
+    @Transient
+    private String oldParentIds;//旧父级id属性 用于在更新区域的父级关系使用
+
+    @Transient
+    @ExcelProperty("父区域")
+        private String parentName;
+
+    public String getOldParentIds() {
+        return oldParentIds;
+    }
+
+    public void setOldParentIds(String oldParentIds) {
+        this.oldParentIds = oldParentIds;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
     /**
      * 区域编码
      */
@@ -33,6 +60,7 @@ public class SysArea {
     /**
      * 区域名称
      */
+    @Column(name = "`name`")
     private String name;
 
     /**
@@ -50,6 +78,7 @@ public class SysArea {
      * 创建时间
      */
     @Column(name = "create_date")
+    @DateTimeFormat("yyyy年-MM-月-dd日")
     private Date createDate;
 
     /**
@@ -305,5 +334,24 @@ public class SysArea {
      */
     public void setIcon(String icon) {
         this.icon = icon == null ? null : icon.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "SysArea{" +
+                "id=" + id +
+                ", parentId=" + parentId +
+                ", parentIds='" + parentIds + '\'' +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", createDate=" + createDate +
+                ", updateBy='" + updateBy + '\'' +
+                ", updateDate=" + updateDate +
+                ", remarks='" + remarks + '\'' +
+                ", delFlag='" + delFlag + '\'' +
+                ", icon='" + icon + '\'' +
+                '}';
     }
 }

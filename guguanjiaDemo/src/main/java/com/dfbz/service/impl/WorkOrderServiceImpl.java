@@ -42,9 +42,10 @@ public class WorkOrderServiceImpl extends IServiceImpl<WorkOrder> implements Wor
         }
         //开启分页
         PageHelper.startPage((Integer) params.get("pageNum"), (Integer) params.get("pageSize"));
+
         WorkOrderMapper workOrderMapper = (WorkOrderMapper) mapper;
         List<WorkOrder> workOrders = workOrderMapper.selectByCondition(params);
-        PageInfo<WorkOrder> pageInfo = new PageInfo<>(workOrders);
+        PageInfo<WorkOrder>  pageInfo = new PageInfo<>(workOrders);
 
         return pageInfo;
     }

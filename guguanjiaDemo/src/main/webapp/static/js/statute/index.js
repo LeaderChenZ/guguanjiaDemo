@@ -6,18 +6,22 @@ var vm = new Vue({
             pageSize: 5
         },
         params:{
-            pageNum: '',
-            pageSize: ''
+
         }
     },
     methods: {
         selectAll: function (pageNum, pageSize) {
             this.params.pageNum = pageNum;
             this.params.pageSize = pageSize;
+            console.log(this.params);
             axios({
                 url: "manager/statute/index",
                 method: "post",
                 data: this.params
+                /*params:{
+                    pageNum:pageNum,
+                    pageSize:pageSize
+                }*/
             }).then(response => {
                 console.log(response.data);
                 // if(response.data.list.length>0){

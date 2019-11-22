@@ -214,10 +214,14 @@
                                                         v-for="num in pageInfo.navigatepageNums"><a
                                                             href="javascript:void(0);"
                                                             @click="selectAll(num,pageInfo.pageSize)">{{num}}</a></li>
-                                                    <li :class="pageInfo.pageNum==pageInfo.pages?'next disabled': 'next'">
-                                                        <a href="javascript:void(0);"
-                                                           @click="selectAll(pageInfo.nextPage,pageInfo.pageSize)">下一页</a>
-                                                    </li>
+
+                                                    <li v-if="pageInfo.pageNum<pageInfo.pageSize" :class="pageInfo.pageNum==pageInfo.pages?'next disabled': 'next'"><a
+                                                            href="javascript:void(0);"
+                                                            @click="selectAll(pageInfo.nextPage,pageInfo.pageSize)">下一页</a></li>
+                                                    <li v-else-if="pageInfo.pageNum>=pageInfo.pageSize" :class="pageInfo.pageNum==pageInfo.pages?'next disabled': 'next'"><a
+                                                            href="javascript:void(0);"
+                                                            >下一页</a></li>
+
                                                     <li class="next "><a href="javascript:void(0);"
                                                                          @Click="selectAll(pageInfo.pages,pageInfo.pageSize)">尾页</a>
                                                     </li>

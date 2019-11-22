@@ -5,32 +5,20 @@
     <base href="/guguanjia/">
     <meta charset="utf-8"/>
     <meta name="renderer" content="webkit">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>固管家服务平台</title>
-
     <meta name="description" content="index"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="static/bootstrap/bootstrap.min.css"/>
     <link rel="stylesheet" href="static/css/font-awesome.min.css"/>
-
     <link rel="stylesheet" href="static/chosen/chosen.min.css"/>
 
     <!-- ace styles -->
     <link rel="stylesheet" href="static/ace/css/ace.min.css" id="main-ace-style"/>
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="static/ace/css/ace-part2.min.css"/>
-    <![endif]-->
     <link rel="stylesheet" href="static/ace/css/ace-skins.min.css"/>
     <link rel="stylesheet" href="static/ace/css/ace-rtl.min.css"/>
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="static/ace/css/ace-ie.min.css"/>
-    <![endif]-->
-
     <link rel="stylesheet" href="static/ztree/metro.css"/>
     <link rel="stylesheet" href="static/validate/css/validform.css"/>
     <link rel="stylesheet" href="static/css/custom.css"/>
@@ -38,31 +26,16 @@
     <!--[if !IE]> -->
     <script src="static/jquery/jquery.js"></script>
     <!-- <![endif]-->
-
-    <!--[if IE]>
-    <script src="static/jquery/jquery-1.11.1.min.js"></script>
-    <![endif]-->
-
-
     <!-- ace settings handler -->
     <script src="static/ace/js/ace-extra.min.js"></script>
 
-    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
-    <!--[if lte IE 8]>
-    <script src="static/bootstrap/html5shiv.min.js"></script>
-    <script src="static/bootstrap/respond.min.js"></script>
-    <script>var ie8 = "ie8";</script>
-    <![endif]-->
 </head>
 
 <body class="no-skin" id="body-content">
 
 <!-- 主体 -->
 <div class="main-container" id="main-container">
-
-
-
 
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
@@ -80,6 +53,7 @@
                 </ul>
             </div>
         </div>
+
 
         <div class="page-content">
 
@@ -130,14 +104,7 @@
                                                     </option>
 
                                                 </select>
-                                                <script>
-                                                    $(function () {
-                                                        $("#chosen-select").chosen({
-                                                            width: "100%",
-                                                            search_contains: true
-                                                        });
-                                                    });
-                                                </script>
+
                                             </td>
                                         </tr>
                                         <tr class="FormData">
@@ -153,7 +120,7 @@
               data-data="{url:'/guguanjia/manager/area/tree',id:'treeselectid',nameId:'treeselectname',pIdKey:'parentId',selectIds:'1',curId:'2',checked:'false',rootNodeName:'',isLayer:'true'}"
               data-title="请选择" data-width="350px" data-height="400px">
 			<i class="ace-icon fa fa-search bigger-110" ></i>
-            <a href="area-select.html" >查找</a>
+            <a href="select.html" >查找</a>
 		</span>
 	</span>
                                                     <input type="hidden" name="parentId" id="treeselectid" value="1">
@@ -173,19 +140,7 @@
 		<i class="ace-icon fa fa-search bigger-110"></i>查找
 	</span>
                                                 </div>
-                                                <script>
-                                                    $(function () {
-                                                        $("#icon-icon-btn").click(function () {
-                                                            $.layer({
-                                                                type: 2,
-                                                                title: '请单击选择图标',
-                                                                maxmin: true,
-                                                                iframe: {src: ctxPath + '/manager/tag/fontawesome?id=icon-input'},
-                                                                area: ['1000px', '550px']
-                                                            });
-                                                        });
-                                                    });
-                                                </script>
+
                                             </td>
                                         </tr>
                                         <tr class="FormData">
@@ -210,66 +165,7 @@
 		<i class="ace-icon fa fa-times align-top  bigger-125"></i> 取 消
 	</span>
                             </div>
-                            <!--<script type="text/javascript">
-                                $(function(){
 
-                                    var areasave = $("#area-save").Validform({
-                                        ajaxPost : true,
-                                        beforeSubmit:function(curform){
-                                            var loadi = layer.load(5,2);
-                                            $("#area-save").data('loadi',loadi);
-                                        },
-                                        callback:function(data){
-                                            layer.close($("#area-save").data('loadi'));
-                                            if(data>0) {
-                                                layer.msg('操作成功', 1, 1,function(){
-                                                    if("false" == "true"){
-                                                        location.reload();
-                                                    }else{
-                                                        $curmenu.trigger('click');
-                                                    }
-                                                    layer.closeAll();
-                                                });
-                                            }else{
-                                                layer.msg('操作失败', 3, 1);
-                                            }
-                                        },
-                                        tiptype : function(msg, o, cssctl) {
-                                            if (!o.obj.is("form")) {
-                                                if (o.type != 2) {
-                                                    tip.errorTip(msg,o.obj);
-                                                }
-                                            }
-                                        },
-                                        tipSweep : true
-                                    });
-
-                                    $("#area-save-save").click(function() {
-                                        if("false" == "true"){
-
-                                        }
-                                        areasave.submitForm(false);
-                                        return false;
-                                    });
-
-                                    $("#area-save-cancel").click(function(){
-                                        layer.closeAll();
-                                        return false;
-                                    });
-
-                                    $("#area-save input,#area-save textarea").blur(function(){
-                                        layer.closeTips();
-                                        return false;
-                                    })
-
-                                });
-                            </script>
-                            <script type="text/javascript">
-
-                                //描述框自动扩张高度
-                                $('textarea[class*=autosize]').autosize({append: "\n"});
-
-                            </script>-->
                         </div>
                     </div>
 
@@ -287,23 +183,27 @@
 <!-- 底部 -->
 <!-- basic scripts -->
 
-
-<script type="text/javascript">
-    if ('ontouchstart' in document.documentElement) document.write("<script src='static/jquery.mobile.custom.min.js'>" + "<" + "/script>");
-</script>
 <script src="static/bootstrap/bootstrap.min.js"></script>
 
 <!-- ace scripts -->
 <script src="static/ace/js/ace-elements.min.js"></script>
 <script src="static/ace/js/ace.min.js"></script>
-
+<script>
+    $(function () {
+        $("#chosen-select").chosen({
+            width: "100%",
+            search_contains: true
+        });
+    });
+</script>
 <script type="text/javascript">
-    var ctxPath = "../../..";
-    window.onload = function () {
-        /* $("#ace-settings-navbar").trigger("click");//固定头部导航栏
-        $("#ace-settings-sidebar").trigger("click");//固定左侧菜单
-        $("#ace-settings-highlight").trigger("click"); */
-    };
+
+    try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+    try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+    try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+
 </script>
 
 <!-- 引入其他js -->
@@ -318,7 +218,10 @@
 <script type="text/javascript" src="static/js/bootstrap-contextmenu.js"></script>
 <script type="text/javascript" src="static/js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="static/js/public.js"></script>
+<script type="text/javascript" src="static/vue/vue.js"></script>
+<script type="text/javascript" src="static/vue/axios.js"></script>
 
+<!--<script type="text/javascript" src="static/js/area/detail.js"></script>-->
 
 </body>
 </html>
