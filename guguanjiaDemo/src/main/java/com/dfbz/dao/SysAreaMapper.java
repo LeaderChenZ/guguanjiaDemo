@@ -29,11 +29,29 @@ public interface SysAreaMapper extends Mapper<SysArea> {
     int insertBatch(@Param("sysAreas") List<SysArea> sysAreas);
     
     
-    @Select("select * from  " +
+    @Select("select sa.*,su.`name` parentName " +
+            "from " +
             "sys_area sa  " +
+            "LEFT JOIN " +
+            "sys_area su " +
+            "on " +
+            "sa.parent_id = su.id " +
             "where  " +
-            "sa.id = #{areaId}")
-    List<SysArea> selectByAreaId(long areaId);
+            "sa.id = ${areaId}")
+    SysArea selectByAreaId(long areaId);
+
+
+    /**
+     * 根据当前区域的id更新所有其子级区域的parentIds
+     * @return
+     */
+    @Update("update  " +
+            " sys_area " +
+            "set " +
+            " parent_ids = REPLACE(parent_ids,#{oldParentIds},#{parentIds}) " +
+            "where " +
+            " parent_ids like concat('%',#{id},'%')")
+    int updateParentIds(SysArea sysArea);
 
 
 

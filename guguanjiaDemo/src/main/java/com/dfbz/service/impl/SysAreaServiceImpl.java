@@ -82,12 +82,12 @@ public class SysAreaServiceImpl extends IServiceImpl<SysArea> implements SysArea
 
 
     /*
-    *写入对象
-    * */
+     *写入对象
+     * */
     @Override
     public int importExcel(InputStream inputStream) {
         int result = 0;
-        ExcelReader excelReader = EasyExcel.read(inputStream,SysArea.class, new SysAreaListener(areaMapper)).build();
+        ExcelReader excelReader = EasyExcel.read(inputStream, SysArea.class, new SysAreaListener(areaMapper)).build();
         ReadSheet readSheet = EasyExcel.readSheet(0).build();
         excelReader.read(readSheet);
         excelReader.finish();
@@ -96,8 +96,25 @@ public class SysAreaServiceImpl extends IServiceImpl<SysArea> implements SysArea
     }
 
 
+    /*
+     * 查询sys_area id对应的数据
+     * */
     @Override
-    public List<SysArea> selectByAreaId(long areaId){
+    public SysArea selectByAreaId(long areaId) {
         return areaMapper.selectByAreaId(areaId);
+    }
+
+
+    @Override
+    public int updateArea(SysArea sysArea) {
+        //1.更新当前区域数据
+        int result = areaMapper.updateByPrimaryKey(sysArea);
+
+        //2.根据oldParents和parentIds判断是否有更新该parentIds字段，
+        if (!sysArea.getOldParentIds().equals(sysArea.getParentIds())) {
+            areaMapper.updateParentIds(sysArea);
+            result++;
+        }
+        return result;
     }
 }

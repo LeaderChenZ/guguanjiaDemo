@@ -51,19 +51,41 @@ public class SysAreaController {
 
 
     /*
-    * 写入对象
-    * */
+     * 写入对象
+     * */
     @RequestMapping("importExcel")
-    public Result importExcel(MultipartFile file) throws Exception{
+    public Result importExcel(MultipartFile file) throws Exception {
         int i = service.importExcel(file.getInputStream());
         Result result = new Result();
-        if (i>0){
+        if (i > 0) {
             result.setMsg("操作成功");
             result.setSuccess(true);
         }
         return result;
 
+    }
 
+    /*
+     * 查询sys_area id对应的值
+     * */
+
+    @RequestMapping("toUpdate")
+    public SysArea toUpdate(long areaId) {
+        return service.selectByAreaId(areaId);
+    }
+
+
+   /*TODO 更新  未完成*/
+
+    @RequestMapping("update")
+    public Result update(@RequestBody  SysArea obj) {
+        int i = service.updateArea(obj);
+        Result result = new Result();
+        if (i > 0) {
+            result.setMsg("操作成功！！");
+            result.setSuccess(true);
+        }
+        return result;
     }
 
 }

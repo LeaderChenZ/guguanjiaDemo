@@ -18,5 +18,7 @@ public interface SysAreaService extends IService<SysArea> {
 
     int importExcel(InputStream inputStream);
 
-    List<SysArea> selectByAreaId(long areaId);
+    SysArea selectByAreaId(long areaId);
+
+    int updateArea(SysArea sysArea);
 }

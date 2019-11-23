@@ -78,17 +78,17 @@
                                         <tr class="FormData">
                                             <td class="CaptionTD">区域名称</td>
                                             <td class="DataTD width-100"><input type="text" name="name" datatype="*"
-                                                                                nullmsg="请输入区域名称！" value="重庆市"></td>
+                                                                                nullmsg="请输入区域名称！" v-model="obj.name"></td>
                                         </tr>
                                         <tr class="FormData">
                                             <td class="CaptionTD">区域编码</td>
                                             <td class="DataTD width-100"><input type="text" name="code" datatype="*"
-                                                                                nullmsg="请输入区域编码！" value="110000"></td>
+                                                                                nullmsg="请输入区域编码！"v-model="obj.code" ></td>
                                         </tr>
                                         <tr class="FormData">
                                             <td class="CaptionTD">区域类型</td>
                                             <td class="DataTD width-100">
-                                                <select class="chosen-select " name="type" id="chosen-select"
+                                                <select class="chosen-select " name="type" id="chosen-select" v-model="obj.type"
                                                         style="display: none;">
                                                     <option value="1">
                                                         国家
@@ -113,14 +113,11 @@
 
                                                 <div class="clearfix width-100  input-group" style="">
                                                     <input class="form-control search-query" type="text" readonly=""
-                                                           id="treeselectname" name="" value="中国">
+                                                           id="treeselectname" name="" v-model="obj.parentName">
                                                     <span class="input-group-btn">
-		<span class="btn btn-purple btn-sm" type="button" style="height: 34px;" data-mode="page"
-              data-url="/guguanjia/manager/tag/treeselect"
-              data-data="{url:'/guguanjia/manager/area/tree',id:'treeselectid',nameId:'treeselectname',pIdKey:'parentId',selectIds:'1',curId:'2',checked:'false',rootNodeName:'',isLayer:'true'}"
-              data-title="请选择" data-width="350px" data-height="400px">
+		<span class="btn btn-purple btn-sm" type="button" style="height: 34px;"  @click="selectArea">
 			<i class="ace-icon fa fa-search bigger-110" ></i>
-            <a href="select.html" >查找</a>
+            <!--<a href="select.html" >查找</a>-->
 		</span>
 	</span>
                                                     <input type="hidden" name="parentId" id="treeselectid" value="1">
@@ -132,11 +129,11 @@
                                             <td class="CaptionTD">区域图标</td>
                                             <td class="DataTD">
                                                 <div class="width-100 clearfix ">
-                                                    <input type="hidden" value="fa fa-smile-o" name="icon"
+                                                    <input type="hidden" value="fa fa-smile-o" name="icon"  v-model="obj.icon"
                                                            id="icon-input">
                                                     <i class="ace-icon fa fa-smile-o bigger-200 pink"
                                                        style="vertical-align: middle;padding-right: 10px;"></i>
-                                                    <span class="btn btn-sm btn-purple" id="icon-icon-btn">
+                                                    <span class="btn btn-sm btn-purple" id="icon-icon-btn"  @click="selectIcon">
 		<i class="ace-icon fa fa-search bigger-110"></i>查找
 	</span>
                                                 </div>
@@ -157,7 +154,7 @@
 
                             <div class="width-100 clearfix" tag-save-btn=""
                                  style="bottom: -36px; left: 0px; position: absolute;">
-	<span class="btn btn-primary btn-sm bigger-110 width-50  pull-left" id="area-save-save">
+	<span class="btn btn-primary btn-sm bigger-110 width-50  pull-left" id="area-save-save"  @click="update">
 		<i class="ace-icon fa fa-floppy-o align-top bigger-125"></i> 确 定
 	</span>
                                 <span class="btn btn-yellow btn-sm bigger-110 width-50 pull-right"
@@ -221,7 +218,7 @@
 <script type="text/javascript" src="static/vue/vue.js"></script>
 <script type="text/javascript" src="static/vue/axios.js"></script>
 
-<!--<script type="text/javascript" src="static/js/area/detail.js"></script>-->
+<script type="text/javascript" src="static/js/area/save.js"></script>
 
 </body>
 </html>

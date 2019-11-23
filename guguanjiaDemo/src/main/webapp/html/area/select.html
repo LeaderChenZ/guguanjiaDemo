@@ -138,12 +138,17 @@
 
                             <div>
                                 <div id="search" class="control-group" style="padding:10px 0 0 15px;">
-                                    <label for="key" class="control-label" style="float:left;padding:5px 5px 3px;">关键字：</label>
-                                    <input type="text" class="empty" id="key" name="key" maxlength="50" style="width:75%;">
+                                    <label for="key" class="control-label"
+                                           style="float:left;padding:5px 5px 3px;">关键字：</label>
+                                    <input type="text" class="empty" id="key" name="key" maxlength="50" v-model="name"
+                                           style="width:75%;"  @keyup.enter="search">
                                 </div>
-                                <ul id="select-tree" class="ztree" style="padding:15px 20px;"><li id="select-tree_1" class="level0" tabindex="0" hidefocus="true" treenode=""><span id="select-tree_1_switch" title="" class="button level0 switch root_open" treenode_switch=""></span><a id="select-tree_1_a" class="level0" treenode_a="" onclick="" target="_blank" style="font-weight:normal;color:#333;" title="全部"><span id="select-tree_1_ico" title="" treenode_ico="" class="button ico_open" style=""></span><span id="select-tree_1_span">全部</span></a><ul id="select-tree_1_ul" class="level0 " style="display:block"><li id="select-tree_2" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="select-tree_2_switch" title="" class="button level1 switch bottom_close" treenode_switch=""></span><a id="select-tree_2_a" class="level1 curSelectedNode" treenode_a="" onclick="" target="_blank" style="font-weight:normal;color:#333;" title="中国"><span id="select-tree_2_ico" title="" treenode_ico="" class="button cusicon ace-icon ico fa fa-institution" style=""></span><span id="select-tree_2_span">中国</span></a></li></ul></li></ul>
-                                <div class="width-100" tag-save-btn="" style="padding-top: 15px; bottom: -36px; position: absolute;">
-		<span class="btn btn-primary btn-sm bigger-110 btn-block" id="treeselectid-save">
+                                <ul id="select-tree" class="ztree" style="padding:15px 20px;">
+
+                                </ul>
+                                <div class="width-100" tag-save-btn=""
+                                     style="padding-top: 15px; bottom: -36px; position: absolute;">
+		<span class="btn btn-primary btn-sm bigger-110 btn-block" id="treeselectid-save" @click="closeDetail">
 			确 定
 		</span>
                                 </div>
@@ -173,11 +178,26 @@
 
 <script type="text/javascript">
 
-    try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-    try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-    try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-    try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+    try {
+        ace.settings.check('navbar', 'fixed')
+    } catch (e) {
+    }
+    try {
+        ace.settings.check('main-container', 'fixed')
+    } catch (e) {
+    }
+    try {
+        ace.settings.check('sidebar', 'fixed')
+    } catch (e) {
+    }
+    try {
+        ace.settings.check('sidebar', 'collapsed')
+    } catch (e) {
+    }
+    try {
+        ace.settings.check('breadcrumbs', 'fixed')
+    } catch (e) {
+    }
 
 </script>
 
@@ -196,7 +216,7 @@
 <script type="text/javascript" src="static/vue/vue.js"></script>
 <script type="text/javascript" src="static/vue/axios.js"></script>
 
-<!--<script type="text/javascript" src="static/js/area/detail.js"></script>-->
+<script type="text/javascript" src="static/js/area/detail.js"></script>
 
 </body>
 </html>

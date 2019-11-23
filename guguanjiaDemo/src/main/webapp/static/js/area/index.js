@@ -43,7 +43,24 @@ var vm = new Vue({
             })
         },
         toUpdate: function (id) {
+            axios({
+                url: 'manager/area/toUpdate',
+                params: {areaId: id}
+            }).then(response => {
+                layer.obj = response.data;
+                let index = layer.open({
+                    type: 2,
+                    title: '区域修改',
+                    content: "html/area/save.html",
+                    area: ["80%", "80%"],
+                    end: () => {  //将then函数中的this传递到end的回调函数中
+                        this.selectAll(this.pageInfo.pageNum, this.pageInfo.pageSize);
 
+                    }
+                })
+            }).catch(function (error) {
+                layer.msg(error)
+            })
         },
         update: function () {
 

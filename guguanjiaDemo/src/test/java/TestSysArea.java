@@ -70,9 +70,7 @@ public class TestSysArea {
 
     @Test
     public void test04(){
-        List<SysArea> list = service.selectByAreaId(2);
-        for (SysArea sysArea : list) {
-            System.out.println(sysArea);
-        }
+        SysArea list = service.selectByAreaId(2);
+        System.out.println(list);
     }
 }
