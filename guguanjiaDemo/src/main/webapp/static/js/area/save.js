@@ -1,7 +1,8 @@
 var vm = new Vue({
     el: '#main-container',
     data: {
-        obj: {}
+        obj: {},
+
     },
     methods: {
         selectAll: function (pageNum, pageSize) {
@@ -55,6 +56,10 @@ var vm = new Vue({
     created: function () {
         this.obj = parent.layer.obj;
         this.obj.oldParentIds = this.obj.parentIds;
+
+        /*if (this.obj.parentName != '') {
+            this.obj.parentName = layer.parentName;
+        }*/
         console.log(this.obj)
     }
 

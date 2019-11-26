@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -26,6 +27,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = "com.dfbz.service")
 @EnableTransactionManagement
 @PropertySource(value = "classpath:sys.properties",encoding = "utf-8")
+@Import({SpringRedis.class,SpringCache.class} )
 public class SpringMybatis {
     @Bean
     public DataSource getDataSource(){

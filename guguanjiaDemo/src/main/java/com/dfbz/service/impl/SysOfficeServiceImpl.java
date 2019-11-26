@@ -5,6 +5,8 @@ import com.dfbz.entity.SysOffice;
 import com.dfbz.service.SysOfficeService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -19,6 +21,7 @@ import java.util.Map;
  */
 @Service
 @Transactional
+@CacheConfig(cacheNames = "officeCache")//设置全局缓存设置
 public class SysOfficeServiceImpl extends IServiceImpl<SysOffice> implements SysOfficeService {
     @Override
     public PageInfo<SysOffice> selectByCondition(Map<String, Object> params) {
@@ -36,5 +39,18 @@ public class SysOfficeServiceImpl extends IServiceImpl<SysOffice> implements Sys
         PageInfo<SysOffice> pageInfo = new PageInfo<>(sysOffices);//生成分页对象
 
         return pageInfo;
+    }
+
+    @Cacheable(key = "'SysOfficeServcieImpl:selectByOid:'+#oid")
+    @Override
+    public SysOffice selectByOid(long oid){
+        SysOfficeMapper sysOfficeMapper= (SysOfficeMapper) mapper;
+        return sysOfficeMapper.selectByOid(oid);
+    }
+
+    @Cacheable(key = "'SysOfficeServiceImpl:selectAll'")
+    @Override
+    public List<SysOffice> selectAll(){
+        return super.selectAll();
     }
 }
