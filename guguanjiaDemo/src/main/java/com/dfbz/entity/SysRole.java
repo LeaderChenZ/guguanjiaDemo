@@ -22,6 +22,7 @@ public class SysRole {
     /**
      * 角色名称
      */
+
     private String name;
 
     /**

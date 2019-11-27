@@ -269,3 +269,123 @@ order by
 	tr.create_date desc
 
 
+#根据父区域id查询所有子级区域
+SELECT
+sys_area.id,
+sys_area.parent_id,
+sys_area.parent_ids,
+sys_area.`code`,
+sys_area.`name`,
+sys_area.type,
+sys_area.create_by,
+sys_area.create_date,
+sys_area.update_by,
+sys_area.update_date,
+sys_area.remarks,
+sys_area.del_flag,
+sys_area.icon
+FROM
+sys_area
+WHERE
+sys_area.parent_ids like CONCAT('%',1,'%')
+
+
+
+
+#查询所有区域及其父区域信息
+select sub.*,parent.name parentName
+from
+	sys_area sub,sys_area parent
+where
+	sub.parent_id=parent.id
+
+
+#	根据父区域id查询所有子级区域 以及当前区域的父区域名
+select sub.*,parent.name parentName
+from
+	sys_area sub,sys_area parent
+where
+	sub.parent_ids like CONCAT('%',3,'%')
+and
+	sub.parent_id=parent.id
+
+
+#根据id查询当前区域及父级区域名
+select sub.*,parent.name parentName
+from
+	sys_area sub,sys_area parent
+where
+	sub.id = 4
+and
+	sub.parent_id=parent.id
+
+
+
+#根据条件查询user信息
+#1.根据条件查询所有信息
+SELECT
+	*
+FROM
+	sys_user su
+LEFT JOIN
+	sys_office so
+ON
+	su.office_id=so.id
+LEFT JOIN
+	sys_user_role sur
+ON
+	sur.user_id=su.id
+LEFT JOIN
+	sys_role sr
+ON
+	sur.role_id=sr.id
+WHERE
+	su.id=26
+AND
+	sr.id=1
+AND
+	su.office_id=47
+AND
+	su.name like CONCAT('%','吉','%')
+
+#2.处理查询字段
+SELECT
+	su.*,so.name officeName,sr.*
+FROM
+	sys_user su
+LEFT JOIN
+	sys_office so
+ON
+	su.office_id=so.id
+LEFT JOIN
+	sys_user_role sur
+ON
+	sur.user_id=su.id
+LEFT JOIN
+	sys_role sr
+ON
+	sur.role_id=sr.id
+WHERE
+	su.id=26
+AND
+	sr.id=1
+AND
+	su.office_id=47
+AND
+	su.name like CONCAT('%','吉','%')
+
+#3.查询所有的role
+select
+	sr.*
+from
+	sys_user su
+LEFT JOIN
+	sys_user_role sur
+ON
+	su.id=sur.user_id
+LEFT JOIN
+	sys_role sr
+ON
+	sr.id=sur.role_id
+where
+	su.id=26

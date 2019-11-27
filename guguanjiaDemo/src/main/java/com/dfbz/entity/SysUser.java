@@ -1,9 +1,13 @@
 package com.dfbz.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "sys_user")
 public class SysUser {
@@ -79,6 +83,7 @@ public class SysUser {
      * 最后登陆时间
      */
     @Column(name = "login_date")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date loginDate;
 
     /**
@@ -123,6 +128,29 @@ public class SysUser {
      */
     @Column(name = "head_picture")
     private String headPicture;
+
+    @Transient
+    private String officeName;
+
+    //关联多方
+    @Transient
+    private List<SysRole> roles;
+
+    public String getOfficeName() {
+        return officeName;
+    }
+
+    public void setOfficeName(String officeName) {
+        this.officeName = officeName;
+    }
+
+    public List<SysRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<SysRole> roles) {
+        this.roles = roles;
+    }
 
     /**
      * 获取编号
