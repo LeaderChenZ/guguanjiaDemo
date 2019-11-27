@@ -43,4 +43,8 @@ public class TestSysUser {
         PageInfo<SysUser> sysUserPageInfo = service.selectByCondition(map);
         System.out.println(sysUserPageInfo);
     }
+    @Test
+    public void test3(){
+
+    }
 }

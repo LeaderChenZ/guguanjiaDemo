@@ -10,6 +10,8 @@ var vm = new Vue({
             pageNum: '',
             pageSize: '',
         },
+        condition:{}
+        ,
         name: '',
         uid: '',
         oid: '',
@@ -32,6 +34,12 @@ var vm = new Vue({
                 layer.msg(error);
             })
         },
+        selectAllCondition:function () {
+            this.condition = {};
+            let testOid = $("#rid").val();
+            console.log(testOid);
+        }
+        ,
         toUpdate: function (id) {
             axios({
                 url: 'manager/area/toUpdate',
@@ -53,11 +61,28 @@ var vm = new Vue({
             })
         },
         update: function () {
-
-
         },
         toDelete: function (id) {
-
+            layer.msg("是否删除？",{
+                time:0,
+                btn:["是","否"],
+                yes:index =>{
+                    axios({
+                        url:'manager/sysuser/toDelete',
+                        params: {
+                            id: id
+                        }
+                    }).then(res =>{
+                        layer.close(index);
+                        layer.msg(res.data);
+                        if (res.data.success){
+                            this.selectAll(this.pageInfo.pageNum,this.pageInfo.pageSize);
+                        }
+                    }).catch(function (error) {
+                        layer.msg(error)
+                    })
+                }
+            });
         },
         deleteById: function () {
 

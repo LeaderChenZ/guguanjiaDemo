@@ -7,4 +7,6 @@ import java.util.Map;
 
 public interface SysUserService extends IService<SysUser>{
     PageInfo<SysUser> selectByCondition(Map<String, Object> params);
+
+
 }
