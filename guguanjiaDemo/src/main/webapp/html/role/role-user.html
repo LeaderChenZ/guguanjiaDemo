@@ -92,14 +92,14 @@
 										<form action="role/saveuser" method="post" id="role-user-form">
 											<div class="widget-main" id="yxuser">
 												<div class="checkbox">
-													<label>
-														<input class="ace ace-checkbox-2" type="checkbox" name="userIds" value="63">
-														<span class="lbl"> 运输方测试账号2</span>
+													<label v-for="user in checkedUser">
+														<input class="ace ace-checkbox-2" @click.stop="changeShow(user.id)" v-model="user.show" type="checkbox" name="userIds" value="63">
+														<span class="lbl"> {{user.name}}</span>
 													</label>
 												</div>
 											</div>
 										</form>
-										<div class="hide" id="removeUserBtn">
+										<div :class="hide" id="removeUserBtn">
 											<a href="javascript:void(0);" class="btn btn-block btn-success">
 												<i class="ace-icon fa fa-trash bigger-110"></i>
 												<span>移除人员</span>
@@ -267,7 +267,7 @@
 <script type="text/javascript" src="static/vue/vue.js"></script>
 <script type="text/javascript" src="static/vue/axios.js"></script>
 
-<!--<script type="text/javascript" src="static/js/office/office.js"></script>-->
+<script type="text/javascript" src="static/js/role/manager_user.js"></script>
 
 </body>
 </html>

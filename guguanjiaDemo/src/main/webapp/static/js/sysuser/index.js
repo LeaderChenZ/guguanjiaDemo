@@ -53,7 +53,6 @@ var vm = new Vue({
                     area: ["80%", "80%"],
                     end: () => {  //将then函数中的this传递到end的回调函数中
                         this.selectAll(this.pageInfo.pageNum, this.pageInfo.pageSize);
-
                     }
                 })
             }).catch(function (error) {
@@ -74,7 +73,7 @@ var vm = new Vue({
                         }
                     }).then(res =>{
                         layer.close(index);
-                        layer.msg(res.data);
+                        layer.msg(res.data.msg);
                         if (res.data.success){
                             this.selectAll(this.pageInfo.pageNum,this.pageInfo.pageSize);
                         }

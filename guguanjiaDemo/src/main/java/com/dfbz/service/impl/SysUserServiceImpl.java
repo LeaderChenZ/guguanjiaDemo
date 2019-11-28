@@ -42,4 +42,9 @@ public class SysUserServiceImpl extends IServiceImpl<SysUser> implements SysUser
     }
 
 
+    @Override
+   public List<SysUser> selectByRid(long rid){
+        return userMapper.selectByRid(rid);
+   }
+
 }

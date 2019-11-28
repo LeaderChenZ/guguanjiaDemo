@@ -1,8 +1,8 @@
 package com.dfbz.controller;
 
 import com.dfbz.entity.Result;
-import com.dfbz.entity.SysUser;
-import com.dfbz.service.SysUserService;
+import com.dfbz.entity.SysRole;
+import com.dfbz.service.SysRoleService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,20 +18,20 @@ import java.util.Map;
  * @date 2019/11/27 16
  */
 @RestController
-@RequestMapping("manager/sysuser")
-public class SuyUserController {
+@RequestMapping("manager/role")
+public class SuyRoleController {
     @Autowired
-    SysUserService service;
+    SysRoleService service;
 
     @RequestMapping("list")
-    public PageInfo<SysUser> list(@RequestBody Map<String, Object> params) {
+    public PageInfo<SysRole> list(@RequestBody Map<String, Object> params) {
 
         return service.selectByCondition(params);
     }
 
     @RequestMapping("toDelete")
     public Result toDelete(long id) {
-        SysUser user = new SysUser();
+        SysRole user = new SysRole();
         user.setId(id);
         user.setDelFlag("1");
         user.setUpdateDate(new Date());
@@ -43,10 +42,5 @@ public class SuyUserController {
             result.setSuccess(true);
         }
         return result;
-    }
-
-    @RequestMapping("selectByRid")
-    public List<SysUser> selectByRid(long rid) {
-        return service.selectByRid(rid);
     }
 }
