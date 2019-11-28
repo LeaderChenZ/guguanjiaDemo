@@ -15,9 +15,10 @@ var vm = new Vue({
             },
             nodes: [],
             treeObj: {},
-            rid:'',//授权角色的id
-            checkedUser:[],//已授权角色的用户,
-            showClass:'hide'
+            rid: '',//授权角色的id
+            checkedUser: [],//已授权角色的用户,
+            showClass: 'hide',
+            uids: ''
         }
     },
     methods: {
@@ -25,7 +26,7 @@ var vm = new Vue({
         selectRealUser: function () {
             axios({
                 url: 'manager/sysuser/selectByRid',
-                params:{rid:this.rid}
+                params: {rid: this.rid}
             }).then(response => {
                 this.checkedUser = response.data;
                 //给每个用户绑定新属性show，用于是否已控制
@@ -36,7 +37,23 @@ var vm = new Vue({
                 layer.msg(error);
             })
         },
-        changeShow:function(uid){
+        changeShow: function (id) {
+            //改动被选中的赋值
+            for (let i = 0; i < this.checkedUser.length; i++) {
+                //被选中的就赋值为它的相反数
+                if (this.checkedUser[i].id == id) {
+                    this.checkedUser[i].show = !this.checkedUser[i].show;
+                    if (this.checkedUser[i].show) {
+                        this.uids.push(this.checkedUser[i].id);//将找到的需要移除人员的id放入uids中
+
+                        this.showClass = 'show';//修改显示提交按钮
+                        return;
+                    }
+                }
+            }
+            if ($("#yxuser input:checked").length == 0) { //如果没有任何的input被选中，就隐藏提交按钮
+                this.showClass = 'hide';
+            }
 
         },
         toUpdate: function (id) {
