@@ -23,8 +23,8 @@ public interface SysRoleMapper extends Mapper<SysRole> {
             "where   " +
             "su.id = #{uid}")
 
-    List<SysRole> selectRoleByUid(long uid);
+    List<SysRole> selectRoleByUid(long uid);  //查询一个用户有多少个角色
 
     @SelectProvider(type = SysRoleProvider.class,method = "selectByCondition")
-    List<SysRole> selectByCondition(Map<String,Object> params);
+    List<SysRole> selectByCondition(Map<String,Object> params); //动态查询（分页查询，条件查询）
 }

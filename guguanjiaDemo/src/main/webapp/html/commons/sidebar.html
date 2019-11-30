@@ -1,4 +1,3 @@
-
 <div class="sidebar-shortcuts" id="sidebar-shortcuts">
     <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
         <button class="btn btn-success">
@@ -48,7 +47,7 @@
             <li data-level="2">
 
                 <a
-                        href="../userCenter/userCenter.html"
+                        href="html/userCenter/userCenter.html"
                         id="menu_manageruserCenter"
                         haschild="false"
                 >
@@ -79,7 +78,7 @@
             <li data-level="2">
 
                 <a
-                        href="../office/office-detail.html"
+                        href="html/office/office-detail.html"
                         id="menu_managercompanydetail"
                         haschild="false"
                 >
@@ -93,7 +92,7 @@
             <li data-level="2">
 
                 <a
-                        href="../user/user.html"
+                        href="html/user/user.html"
                         id="menu_managercompanyaccounts"
                         haschild="false"
                 >
@@ -107,7 +106,7 @@
             <li data-level="2">
 
                 <a
-                        href="../work/company/work.html"
+                        href="html/work/company/work.html"
                         id="menu_managercompanywork"
                         haschild="false"
                 >
@@ -138,7 +137,7 @@
             <li data-level="2">
 
                 <a
-                        href="../work/admin/work.html"
+                        href="html/work/admin/work.html"
                         id="menu_manageradminwork"
                         haschild="false"
                 >
@@ -152,7 +151,7 @@
             <li data-level="2">
 
                 <a
-                        href="../qualification/index.html"
+                        href="html/qualification/index.html"
                         id="menu_managerqualificationindex"
                         haschild="false"
                 >
@@ -166,7 +165,7 @@
             <li data-level="2">
 
                 <a
-                        href="index.html"
+                        href="html/index.html"
                         id="menu_managerdemandindex"
                         haschild="false"
                 >
@@ -180,7 +179,7 @@
             <li data-level="2">
 
                 <a
-                        href="../examine/index.html"
+                        href="html/examine/index.html"
                         id="menu_managerexamineindex"
                         haschild="false"
                 >
@@ -194,7 +193,7 @@
             <li data-level="2">
 
                 <a
-                        href="../app/index.html"
+                        href="html/app/index.html"
                         id="menu_managerappindex"
                         haschild="false"
                 >
@@ -208,7 +207,7 @@
             <li data-level="2">
 
                 <a
-                        href="../statute/index.html"
+                        href="html/statute/index.html"
                         id="menu_managerstatuteindex"
                         haschild="false"
                 >
@@ -239,7 +238,7 @@
             <li data-level="2">
 
                 <a
-                        href="../area/area.html"
+                        href="html/area/area.html"
                         id="menu_managerarea"
                         haschild="false"
                 >
@@ -253,7 +252,7 @@
             <li data-level="2">
 
                 <a
-                        href="../office/office.html"
+                        href="html/office/office.html"
                         id="menu_manageroffice"
                         haschild="false"
                 >
@@ -267,7 +266,7 @@
             <li data-level="2">
 
                 <a
-                        href="../user/user-list.html"
+                        href="html/user/user-list.html"
                         id="menu_managersysuser"
                         haschild="false"
                 >
@@ -281,7 +280,7 @@
             <li data-level="2">
 
                 <a
-                        href="../role/role.html"
+                        href="html/role/role.html"
                         id="menu_managerrole"
                         haschild="false"
                 >
@@ -312,7 +311,7 @@
             <li data-level="2">
 
                 <a
-                        href="../menu/menu.html"
+                        href="html/menu/menu.html"
                         id="menu_managermenu"
                         haschild="false"
                 >
@@ -326,7 +325,7 @@
             <li data-level="2">
 
                 <a
-                        href="../dict/dict.html"
+                        href="html/dict/dict.html"
                         id="menu_managerdict"
                         haschild="false"
                 >
@@ -340,7 +339,7 @@
             <li data-level="2">
 
                 <a
-                        href="../log/log.html"
+                        href="html/log/log.html"
                         id="menu_managersyslog"
                         haschild="false"
                 >
@@ -371,7 +370,7 @@
             <li data-level="2">
 
                 <a
-                        href="../ehcache/ehcache.html"
+                        href="html/ehcache/ehcache.html"
                         id="menu_managermonitorehcache"
                         haschild="false"
                 >
@@ -385,7 +384,7 @@
             <li data-level="2">
 
                 <a
-                        href="../jvm/jvm.html"
+                        href="html/jvm/jvm.html"
                         id="menu_managermonitorjvm"
                         haschild="false"
                 >
@@ -400,5 +399,81 @@
     </li>
 </ul><!-- /.nav-list -->
 <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-    <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+    <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left"
+       data-icon2="ace-icon fa fa-angle-double-right"></i>
 </div>
+<div style="display: none">
+    <ul id="treeMenu" class="ztree">
+
+    </ul>
+</div>
+<script>
+    let vm = new Vue({
+        el: '#sidebar-menu',
+        data: function () {
+            return {
+                setting:{
+                data: {
+                    simpleData: {
+                        enable: true,  //设置简单数据模式,自动根据id(默认id)和pId(默认pId)  、rootId（默认0）生成菜单树
+                        idKey: 'id',
+                        pIdKey: 'parentId',
+                        rootPId:0
+                    }
+                }
+                },
+                nodes: ''
+            }
+        },
+        methods: {
+            initTree: function () {
+                //获取session中的用户权限，如果不为空则直接调用showTree
+                let userInfo = sessionStorage.getItem("userInfo");
+                // console.log((JSON).parse(userInfo).resources);//保存在sessionStorage会话中的是字符串，需要转换为json对象
+
+                //转换数据结构为树形存储对应的结构
+                this.nodes = JSON.parse(userInfo).resources;
+                let treeObj = $.fn.zTree.init($("#treeMenu"), this.setting, this.nodes);
+                //转换成树结构方式存储
+                this.nodes = treeObj.getNodes();
+                // console.log(this.nodes);
+
+                //获取menu的菜单根元素ul
+                let ul = $("#sidebar-menu");
+                // console.log(ul.html())
+               this.showall(this.nodes, ul)
+            },
+            showall: function (menu_list, parent) { //menu_list为json数据，parent为要组合成html的容器
+                for (let i = 0; i < menu_list.length; i++) {
+                    //构造一个li
+                    // console.log(menu_list[i]);
+                    let li = $("<li></li>");
+                    li.append(`<a
+                :href="${menu_list[i].url}" class="dropdown-toggle"
+                haschild="true"
+        >
+            <i class="menu-icon ${menu_list[i].icon}"></i>
+            <span class="menu-text"
+                  style="vertical-align: middle;"
+            > ${menu_list[i].name} </span>
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+        <b class="arrow"></b>
+`);
+                    console.log(menu_list[i].children)
+                    //判断当前的menu_list有没有子元素，如果有则在当前的li中递归调用当前的方式showall
+                    if(menu_list[i].children!=undefined&&menu_list[i].children.length>0){
+                        let ul = $("<ul></ul>");
+                        li.append(ul);
+                        this.showall(menu_list[i].children,ul);
+                    }
+                    parent.append(li);
+                }
+
+            }
+        },
+        mounted: function () {
+            this.initTree();
+        }
+    })
+</script>

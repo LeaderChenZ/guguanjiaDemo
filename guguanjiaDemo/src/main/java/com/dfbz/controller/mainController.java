@@ -1,6 +1,7 @@
 package com.dfbz.controller;
 
 import com.dfbz.entity.Result;
+import com.dfbz.entity.SysResource;
 import com.dfbz.entity.SysUser;
 import com.dfbz.service.SysResourceService;
 import com.dfbz.service.SysUserService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -50,7 +52,7 @@ public class mainController {
                     String password = (String) params.get("password");
                     user.setUsername(username);
                     user.setPassword(EncryptUtils.MD5_HEX(EncryptUtils.MD5_HEX(password)+username));
-                    SysUser loginUser = userService.selectOne(user);
+                    SysUser loginUser = userService.selectOne(user);//查询当前角色的所有信息
                     if (loginUser!=null)
                     {
                         result.setSuccess(true);
@@ -60,7 +62,14 @@ public class mainController {
                         map.put("id",loginUser.getId());
 
                         //查询用户的所有资源权限，放入result
-//                        resourceService.selectByRid()
+                        List<SysResource> sysResources = resourceService.selectAllByUid(loginUser.getId());//查询用户的所有资源权限
+                        map.put("resources",sysResources);
+                        result.setObj(map);
+
+
+                        //将用户信息放入session
+                        session.setAttribute("user",user);
+                        session.setAttribute("resources",sysResources);
                     }
 
                 }

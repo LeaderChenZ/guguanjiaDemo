@@ -1,5 +1,3 @@
-
-
 <div class="navbar-container clearfix" id="navbar-container">
     <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
         <span class="sr-only">Toggle sidebar</span>
@@ -12,7 +10,7 @@
     </button>
 
     <div class="navbar-header pull-left" style="min-width:190px;">
-        <a  class="navbar-brand">
+        <a class="navbar-brand">
             <small>
                 固管家服务平台
             </small>
@@ -39,7 +37,7 @@
             </li>
 
             <li class="purple" style="display:none;">
-                <a data-toggle="dropdown" class="dropdown-toggle" >
+                <a data-toggle="dropdown" class="dropdown-toggle">
                     <i class="ace-icon fa fa-bell icon-animated-bell"></i>
                     <span class="badge badge-important">8</span>
                 </a>
@@ -51,7 +49,7 @@
                     </li>
 
                     <li>
-                        <a >
+                        <a>
                             <div class="clearfix">
 											<span class="pull-left">
 												<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
@@ -63,14 +61,14 @@
                     </li>
 
                     <li>
-                        <a >
+                        <a>
                             <i class="btn btn-xs btn-primary fa fa-user"></i>
                             Bob just signed up as an editor ...
                         </a>
                     </li>
 
                     <li>
-                        <a >
+                        <a>
                             <div class="clearfix">
 											<span class="pull-left">
 												<i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
@@ -82,7 +80,7 @@
                     </li>
 
                     <li>
-                        <a >
+                        <a>
                             <div class="clearfix">
 											<span class="pull-left">
 												<i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>
@@ -94,7 +92,7 @@
                     </li>
 
                     <li class="dropdown-footer">
-                        <a >
+                        <a>
                             See all notifications
                             <i class="ace-icon fa fa-arrow-right"></i>
                         </a>
@@ -103,8 +101,8 @@
             </li>
 
             <li class="light-blue">
-                <a data-toggle="dropdown"  class="dropdown-toggle">
-                    <img class="nav-user-photo" src="static/img/small-male-pic.png" />
+                <a data-toggle="dropdown" class="dropdown-toggle">
+                    <img class="nav-user-photo" src="static/img/small-male-pic.png"/>
                     <span class="user-info">
 									<small>你好,</small>
 									超级管理员
@@ -134,3 +132,24 @@
         </ul>
     </div>
 </div><!-- /.navbar-container -->
+
+<script>
+    let vm = new Vue({
+        el: '#navbar-container',
+        data: function () {
+            return {}
+        },
+        methods: {},
+        created: function () {
+            //在vue对象创建的时候，进行判断   从sessionStorage中校验是否存在登录信息 ，如果没有则跳转到登录页面
+            let userInfo = sessionStorage.getItem("userInfo");
+            // console.log(userInfo);
+            if (userInfo == null) {
+                layer.msg("请登录后访问！", {time: 500}, function () {
+                    location.href = 'html/login.html';
+                })
+
+            }
+        }
+    })
+</script>

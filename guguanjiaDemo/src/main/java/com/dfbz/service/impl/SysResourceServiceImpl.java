@@ -37,13 +37,14 @@ public class SysResourceServiceImpl extends IServiceImpl<SysResource> implements
 
     @Override
     public List<SysResource> selectAllByUid(long uid) {
+        //查询一个用户有多少个角色
         List<SysRole> sysRoles = roleMapper.selectRoleByUid(uid);
         List<SysResource> userResources = null;
         if (sysRoles != null) {
             //遍历所有角色，查询每个角色的权限，   去重
             Set<SysResource> set = new HashSet<>();
             for (SysRole sysRole : sysRoles) {
-                List<SysResource> sysResources = mapper.selectByRid(sysRole.getId());
+                List<SysResource> sysResources = mapper.selectByRid(sysRole.getId()); //查询每个角色的权限
                 set.addAll(sysResources);//去重
             }
             userResources = new ArrayList<>();
