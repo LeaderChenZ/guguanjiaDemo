@@ -49,4 +49,10 @@ public class SuyUserController {
     public List<SysUser> selectByRid(long rid) {
         return service.selectByRid(rid);
     }
+
+    //根据公司id，角色id 查询出当前选中公司的未给当前角色授权的用户
+    @RequestMapping("selectNoRole")
+    public List<SysUser> selectNoRole(long rid, long oid) {
+        return service.selectNoRole(rid, oid);
+    }
 }

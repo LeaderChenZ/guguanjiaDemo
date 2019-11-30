@@ -11,4 +11,6 @@ public interface SysUserService extends IService<SysUser>{
 
 
     List<SysUser> selectByRid(long rid);
+
+    List<SysUser> selectNoRole(long rid, long oid);
 }

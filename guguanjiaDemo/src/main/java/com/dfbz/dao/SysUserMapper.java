@@ -28,4 +28,22 @@ public interface SysUserMapper extends Mapper<SysUser> {
             "and  " +
             "sr.id =#{rid} ")
     List<SysUser> selectByRid(long rid);
+
+
+    //根据公司id，角色id 查询出当前选中公司的未给当前角色授权的用户
+    @Select("select * " +
+            "from  " +
+            "sys_user " +
+            "where " +
+            "office_id = 56 " +
+            "and " +
+            "id not in  " +
+            "(select sur.user_id from " +
+            "sys_role sr ,sys_user_role sur  " +
+            "where " +
+            "sr.id=1 " +
+            "and " +
+            "sr.id = sur.role_id " +
+            ")")
+    List<SysUser> selectNoRole(@Param("rid") long rid,@Param("oid")long oid);
 }

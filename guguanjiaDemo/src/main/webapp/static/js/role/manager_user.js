@@ -11,14 +11,21 @@ var vm = new Vue({
                 },
                 callback: {
                     onClick: this.onClick
+                },
+                view: {
+                    fontCss: this.setCss
                 }
             },
             nodes: [],
             treeObj: {},
+            treeNode: {},
             rid: '',//授权角色的id
             checkedUser: [],//已授权角色的用户,
-            showClass: 'hide',
-            uids: ''
+            companyUsers:[],//公司未授权当前角色的用户
+            showClass: 'hide',//显示隐藏移除授权按钮
+            companyShowClass: 'hide',////显示隐藏授权按钮
+            uids: [],//需要移除角色授权的人员id数组
+            cids: [],
         }
     },
     methods: {
@@ -76,33 +83,54 @@ var vm = new Vue({
                 layer.msg(error)
             })
         },
-        update: function () {
-
-
-        },
-        toDelete: function (id) {
-
-        },
-        deleteById: function () {
-
-        },
-        save: function () {
-
-        },
         initTree: function () { //初始化ZTree
             axios({
-                url: 'manager/area'
+                url: 'manager/office/list'
             }).then(response => {
                 this.nodes = response.data;
-                this.treeObj = $.fn.zTree.init($("#treeMenu"), this.setting, this.nodes);
+                this.nodes[this.nodes.length] = {
+                    "id": 0,
+                    "name": "所有机构"
+                }
+                this.treeObj = $.fn.zTree.init($("#treeOffice"), this.setting, this.nodes);
             }).catch(function (error) {
                 layer.msg(error)
             });
 
         },
         onClick: function (event, treeId, treeNode) {
-            this.params.aid = treeNode.id;
-            this.selectAll(this.pageInfo.pageNum, this.pageInfo.pageSize);
+            this.treeNode = treeNode;
+            let treeNodes = this.treeObj.transformToArray(this.treeObj.getNodes());
+            //清楚原高亮标记
+            for (let index in treeNodes) {
+                if (treeNodes[index].id == treeNode.id) {
+                    treeNodes[index].higtLine = true;//设置高亮标志
+                } else {
+                    treeNodes[index].higtLine = false;
+                }
+                this.treeObj.updateNode(treeNodes[index]);
+            }
+            this.dxUser();
+        },
+        setCss: function (treeId, treeNode) {
+            return treeNode.higtLine ? {color: "red"} : {color: ''};//根据标记显示高亮
+        },
+        dxUser: function () {
+        //根据公司id，角色id 查询出当前选中公司的未给当前角色授权的用户
+            axios({
+                url:'manager/sysuser/selectNoRole',
+                params:{
+                    oid:this.treeNode.id,rid:this.rid
+                }
+            }).then(res =>{
+                this.companyUsers = res.data;
+                //给每个用户绑定新属性show，用于控制被选中与否
+                for (let i = 0; i < this.companyUsers.length; i++) {
+                    this.companyUsers[i].show=false;
+                }
+            }).catch(function (error) {
+                layer.msg(error)
+            })
         }
     },
     created: function () {

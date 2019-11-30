@@ -24,17 +24,18 @@ public class SysUserServiceImpl extends IServiceImpl<SysUser> implements SysUser
 
     @Autowired
     SysUserMapper userMapper;
+
     @Override
     public PageInfo<SysUser> selectByCondition(Map<String, Object> params) {
         //默认值设置
-        if(StringUtils.isEmpty(params.get("pageNum"))){
-            params.put("pageNum",1);
+        if (StringUtils.isEmpty(params.get("pageNum"))) {
+            params.put("pageNum", 1);
         }
-        if(StringUtils.isEmpty(params.get("pageSize"))){
-            params.put("pageSize",5);
+        if (StringUtils.isEmpty(params.get("pageSize"))) {
+            params.put("pageSize", 5);
         }
-        PageHelper.startPage((Integer) params.get("pageNum"),(Integer) params.get("pageSize"));
-        SysUserMapper sysUserMapper= (SysUserMapper) mapper;
+        PageHelper.startPage((Integer) params.get("pageNum"), (Integer) params.get("pageSize"));
+        SysUserMapper sysUserMapper = (SysUserMapper) mapper;
         List<SysUser> sysUsers = sysUserMapper.selectByCondition(params);
         PageInfo<SysUser> pageInfo = new PageInfo<>(sysUsers);//生成分页对象
 
@@ -43,8 +44,13 @@ public class SysUserServiceImpl extends IServiceImpl<SysUser> implements SysUser
 
 
     @Override
-   public List<SysUser> selectByRid(long rid){
+    public List<SysUser> selectByRid(long rid) {
         return userMapper.selectByRid(rid);
-   }
+    }
 
+    //根据公司id，角色id 查询出当前选中公司的未给当前角色授权的用户
+    @Override
+    public List<SysUser> selectNoRole(long rid, long oid) {
+        return userMapper.selectNoRole(rid, oid);
+    }
 }
