@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,6 +40,23 @@ public class SuyRoleController {
         Result result = new Result();
         if (i > 0) {
             result.setMsg("操作成功！");
+            result.setSuccess(true);
+        }
+        return result;
+    }
+
+    @RequestMapping("updateByUids")
+    public Result updateByUids(@RequestBody Map<String, Object> params) {
+        List<Integer> list = (List<Integer>) params.get("uids");
+        int rid = (int) params.get("rid");
+        long[] uids = new long[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            uids[i] = Integer.valueOf(list.get(i));
+        }
+        Result result = new Result();
+        int i = service.updateByUids(rid, uids);
+        if (i > 0) {
+            result.setMsg("更新成功！");
             result.setSuccess(true);
         }
         return result;

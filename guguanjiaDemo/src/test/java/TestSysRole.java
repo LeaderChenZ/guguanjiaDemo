@@ -34,5 +34,10 @@ public class TestSysRole {
         System.out.println(sysRolePageInfo);
     }
 
+    @Test
+    public void test02() {
+        int i = service.updateByUids(24, 40);
+    }
+
 
 }

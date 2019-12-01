@@ -70,6 +70,15 @@
 
 									<div class="widget-body">
 										<div class="widget-main" id="dxuser">
+											<label v-for="cUser in companyUsers">
+												<!--
+													vue 中，checkbox、radio、select被选中规则：
+													1.value值与v-model绑定属性值一致，自动选中
+													2.v-mode直接是一个boolean值  true则选中
+												-->
+												<input class="ace ace-checkbox-2"   @click.stop="changeCompanyShow(cUser.id)" v-model="cUser.show" type="checkbox" name="userIds" value="63">
+												<span class="lbl">{{cUser.name}}</span>
+											</label>
 
 										</div>
 										<div class="hide" id="addUserBtn">
@@ -100,7 +109,7 @@
 											</div>
 										</form>
 										<div :class="showClass" id="removeUserBtn">
-											<a href="javascript:void(0);" class="btn btn-block btn-success">
+											<a href="javascript:void(0);" class="btn btn-block btn-success" @click="removeUser">
 												<i class="ace-icon fa fa-trash bigger-110"></i>
 												<span>移除人员</span>
 											</a>

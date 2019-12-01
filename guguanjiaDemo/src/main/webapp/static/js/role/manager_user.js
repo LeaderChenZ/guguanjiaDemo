@@ -21,7 +21,7 @@ var vm = new Vue({
             treeNode: {},
             rid: '',//授权角色的id
             checkedUser: [],//已授权角色的用户,
-            companyUsers:[],//公司未授权当前角色的用户
+            companyUsers: [],//公司未授权当前角色的用户
             showClass: 'hide',//显示隐藏移除授权按钮
             companyShowClass: 'hide',////显示隐藏授权按钮
             uids: [],//需要移除角色授权的人员id数组
@@ -61,6 +61,22 @@ var vm = new Vue({
             if ($("#yxuser input:checked").length == 0) { //如果没有任何的input被选中，就隐藏提交按钮
                 this.showClass = 'hide';
             }
+
+        }, removeUser: function () {
+            let params = {rid: this.rid, uids: this.uids};
+            axios({
+                ul: "manager/role/updateByUids",
+                method: "post",
+                data: params
+            }).then(res => {
+                this.selectRealUser();
+                this.showClass = 'hide';
+                layer.msg(res.data.msg)
+            }).catch(function (err) {
+                layer.msg(err);
+            })
+        },
+        changeCompanyShow: function (id) {
 
         },
         toUpdate: function (id) {
@@ -116,17 +132,17 @@ var vm = new Vue({
             return treeNode.higtLine ? {color: "red"} : {color: ''};//根据标记显示高亮
         },
         dxUser: function () {
-        //根据公司id，角色id 查询出当前选中公司的未给当前角色授权的用户
+            //根据公司id，角色id 查询出当前选中公司的未给当前角色授权的用户
             axios({
-                url:'manager/sysuser/selectNoRole',
-                params:{
-                    oid:this.treeNode.id,rid:this.rid
+                url: 'manager/sysuser/selectNoRole',
+                params: {
+                    oid: this.treeNode.id, rid: this.rid
                 }
-            }).then(res =>{
+            }).then(res => {
                 this.companyUsers = res.data;
                 //给每个用户绑定新属性show，用于控制被选中与否
                 for (let i = 0; i < this.companyUsers.length; i++) {
-                    this.companyUsers[i].show=false;
+                    this.companyUsers[i].show = false;
                 }
             }).catch(function (error) {
                 layer.msg(error)

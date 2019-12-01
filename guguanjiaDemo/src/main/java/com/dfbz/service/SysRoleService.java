@@ -8,4 +8,5 @@ import java.util.Map;
 public interface SysRoleService extends IService<SysRole>{
     PageInfo<SysRole> selectByCondition(Map<String, Object> params);
 
+    int updateByUids(long rid, long... uids);
 }

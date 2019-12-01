@@ -45,6 +45,9 @@ public class TestSysUser {
     }
     @Test
     public void test3(){
-
+        List<SysUser> sysUsers = service.selectNoRole(2, 53);
+        for (SysUser sysUser : sysUsers) {
+            System.out.println(sysUser);
+        }
     }
 }
