@@ -63,9 +63,10 @@ var vm = new Vue({
             }
 
         }, removeUser: function () {
+            //逻辑删除角色中已选中人员
             let params = {rid: this.rid, uids: this.uids};
             axios({
-                ul: "manager/role/updateByUids",
+                url: "manager/role/updateByUids",
                 method: "post",
                 data: params
             }).then(res => {
@@ -77,6 +78,25 @@ var vm = new Vue({
             })
         },
         changeCompanyShow: function (id) {
+            //
+            for (let i = 0; i < this.companyUsers.length; i++) {
+                if (this.companyUsers[i].id == id) {
+                    this.companyUsers[i].show=!this.companyUsers[i].show;
+                        console.log(this.companyUsers[i].show)
+                    if (this.companyUsers[i].show) {
+                        console.log(this.companyUsers[i].show)
+                        this.cids.push(this.companyUsers[i].id);//将找到的需要移除人员的id放入cids中
+                        this.companyShowClass='show';//修改显示提交按钮
+                        return;
+                    }
+                }
+            }
+            if ($("#dxuser input:checked").length == 0) {//如果没有任何的input被选中
+                this.companyShowClass='hide';//隐藏提交按钮
+
+            }
+        },
+        insertUsers:function(){
 
         },
         toUpdate: function (id) {

@@ -24,7 +24,7 @@ public interface SysUserMapper extends Mapper<SysUser> {
             "and  " +
             "sur.role_id = sr.id  " +
             "and  " +
-            "su.del_flag=0  " +
+            "sur.del_flag=0  " +
             "and  " +
             "sr.id =#{rid} ")
     List<SysUser> selectByRid(long rid);
@@ -35,13 +35,13 @@ public interface SysUserMapper extends Mapper<SysUser> {
             "from  " +
             "sys_user " +
             "where " +
-            "office_id = 56 " +
+            "office_id = #{oid} " +
             "and " +
             "id not in  " +
             "(select sur.user_id from " +
             "sys_role sr ,sys_user_role sur  " +
             "where " +
-            "sr.id=1 " +
+            "sr.id=#{rid} " +
             "and " +
             "sr.id = sur.role_id " +
             ")")
