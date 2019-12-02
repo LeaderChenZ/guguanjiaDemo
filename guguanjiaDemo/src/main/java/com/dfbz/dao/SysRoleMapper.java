@@ -1,10 +1,7 @@
 package com.dfbz.dao;
 
 import com.dfbz.entity.SysRole;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
@@ -31,4 +28,7 @@ public interface SysRoleMapper extends Mapper<SysRole> {
 
     @UpdateProvider(type = SysRoleProvider.class, method = "updateByUids")
     int updateByUids(@Param("rid") long rid, @Param("uids") long... uids);
+
+    @InsertProvider(type = SysRoleProvider.class, method = "insertBath")
+    int  insertBath(@Param("cids") List<Long> cids,@Param("rid")long rid);
 }

@@ -40,9 +40,15 @@ public class SysRoleServiceImpl extends IServiceImpl<SysRole> implements SysRole
 
         return pageInfo;
     }
+
     @Override
-    public int updateByUids(long rid, long... uids){
-        return roleMapper.updateByUids(rid,uids);
+    public int updateByUids(long rid, long... uids) {
+        return roleMapper.updateByUids(rid, uids);
+    }
+
+    @Override
+    public int insertBath(List<Long> cids, long rid) {
+        return roleMapper.insertBath(cids, rid);
     }
 
 }

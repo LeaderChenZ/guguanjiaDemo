@@ -3,6 +3,7 @@ package com.dfbz.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,4 +62,15 @@ public class SysRoleProvider {
         sb.append(")");
         return sb.toString();
     }
+    public String  insertBath(@Param("cids") List<Long> cids,@Param("rid")long rid){
+        StringBuilder sb = new StringBuilder();
+        sb.append("INSERT INTO `sys_user_role`( `role_id`, `user_id`, `create_by`, `create_date`, `update_by`," +
+                " `update_date`, `del_flag`) VALUES ");
+        for (int i = 0; i < cids.size(); i++) {
+            sb.append("(#{rid},#{cids["+i+"]},null,now(),null,now(),0),");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        return sb.toString();
+    }
+
 }

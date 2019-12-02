@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,5 +41,11 @@ public class TestSysRole {
         int i = service.updateByUids(24, 40);
     }
 
-
+    @Test
+    public void test03() {
+        List<Long> list = new ArrayList<>();
+        list.add(64L);
+        list.add(69L);
+        roleMapper.insertBath(list, 2);
+    }
 }

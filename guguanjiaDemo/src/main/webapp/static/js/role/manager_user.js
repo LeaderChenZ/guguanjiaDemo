@@ -97,7 +97,18 @@ var vm = new Vue({
             }
         },
         insertUsers:function(){
-
+            let params = {cids:this.cids,rid:this.rid};
+                axios({
+                    url:"manager/role/insertBath",
+                    data:params,
+                    method:"post"
+                }).then(res =>{
+                    this.selectRealUser();
+                    this.companyShowClass = 'hide';
+                    layer.msg(res.data.msg)
+                }).catch(function (error) {
+                    layer.msg(error)
+                })
         },
         toUpdate: function (id) {
             axios({

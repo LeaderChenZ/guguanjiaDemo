@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -60,5 +61,22 @@ public class SuyRoleController {
             result.setSuccess(true);
         }
         return result;
+    }
+    @RequestMapping("insertBath")
+    public Result insertBath(@RequestBody Map<String, Object> params) {
+        int rid = (int) params.get("rid");
+        ArrayList<Long> cids = new ArrayList<>();
+        List<Integer> list = (List<Integer>) params.get("cids");
+        for (Integer integer : list) {
+            cids.add(Long.valueOf(integer));
+        }
+        int i = service.insertBath(cids, rid);
+        Result result = new Result();
+        if (i > 0) {
+            result.setMsg("更新成功！");
+            result.setSuccess(true);
+        }
+        return result;
+
     }
 }
