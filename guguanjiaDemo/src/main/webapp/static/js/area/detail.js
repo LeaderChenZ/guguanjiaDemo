@@ -36,7 +36,7 @@ var vm = new Vue({
         },
         initTree: function () {
             axios({
-                url: 'manager/area'
+                url: 'manager/area/list'
             }).then(response => {
                 this.nodes = response.data;
                 this.treeObj = $.fn.zTree.init($("#select-tree"), this.setting, this.nodes);

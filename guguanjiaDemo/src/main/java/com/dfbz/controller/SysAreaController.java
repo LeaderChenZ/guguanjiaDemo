@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -25,6 +26,10 @@ public class SysAreaController {
     @Autowired
     SysAreaService service;
 
+    @RequestMapping("")
+    public ModelAndView toIndex(){
+        return new ModelAndView("/html/area/area.html");
+    }
     @RequestMapping("list")
     public List<SysArea> selectAll() {
         return service.selectAll();
