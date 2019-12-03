@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
@@ -21,8 +22,13 @@ public class StatuteController {
     @Autowired
     StatuteService service;
 
+    @RequestMapping("")
+    public ModelAndView toIndex() {
+        return new ModelAndView("/html/statute/index.html");
+    }
+
     @RequestMapping("index")
-    public PageInfo<Statute> index(@RequestBody Map<String,Object> params) {
+    public PageInfo<Statute> index(@RequestBody Map<String, Object> params) {
         System.out.println(params);
        /* Map<String,Object> map = new HashMap<>();
         map.put("pageNum",pageNum);+

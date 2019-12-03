@@ -33,7 +33,7 @@ var vm = new Vue({
             this.params.pageNum = pageNum;
             this.params.pageSize = pageSize;
             axios({
-                url: 'manager/office',
+                url: 'manager/office/index',
                 method: 'post',
                 data: this.params
             }).then(response => {

@@ -16,6 +16,7 @@ public interface SysResourceMapper extends Mapper<SysResource> {
             "so.role_id = sr.id " +
             "and " +
             "so.resource_id = se.id " +
+            "and se.type=0 " +
             "and " +
             "sr.id = #{rid}")
     List<SysResource> selectByRid(long rid); //查询角色的权限（左边侧栏的数据）

@@ -53,6 +53,46 @@ public class SysLog {
      */
     private String method;
 
+
+    /*
+    * 操作提交的数据
+    * */
+    private String params;
+
+    /*
+    *异常信息
+    * */
+    private String exception;
+
+    /*
+    *描述
+    * */
+    private String description;
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setParams(String params) {
+        this.params = params;
+    }
+
+    public String getException() {
+        return exception;
+    }
+
+    public void setException(String exception) {
+        this.exception = exception;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     /**
      * 获取编号
      *

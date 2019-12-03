@@ -29,7 +29,7 @@
 </div><!-- /.sidebar-shortcuts -->
 
 <ul class="nav nav-list" id="sidebar-menu">
-    <li data-level="1">
+    <!--<li data-level="1">
 
         <a
                 href="javascript:void(0);" class="dropdown-toggle"
@@ -396,7 +396,7 @@
 
             </li>
         </ul>
-    </li>
+    </li>-->
 </ul><!-- /.nav-list -->
 <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
     <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left"
@@ -412,15 +412,15 @@
         el: '#sidebar-menu',
         data: function () {
             return {
-                setting:{
-                data: {
-                    simpleData: {
-                        enable: true,  //设置简单数据模式,自动根据id(默认id)和pId(默认pId)  、rootId（默认0）生成菜单树
-                        idKey: 'id',
-                        pIdKey: 'parentId',
-                        rootPId:0
+                setting: {
+                    data: {
+                        simpleData: {
+                            enable: true,  //设置简单数据模式,自动根据id(默认id)和pId(默认pId)  、rootId（默认0）生成菜单树
+                            idKey: 'id',
+                            pIdKey: 'parentId',
+                            rootPId: 0
+                        }
                     }
-                }
                 },
                 nodes: ''
             }
@@ -441,31 +441,48 @@
                 //获取menu的菜单根元素ul
                 let ul = $("#sidebar-menu");
                 // console.log(ul.html())
-               this.showall(this.nodes, ul)
+                this.showall(this.nodes, ul)
             },
             showall: function (menu_list, parent) { //menu_list为json数据，parent为要组合成html的容器
                 for (let i = 0; i < menu_list.length; i++) {
                     //构造一个li
                     // console.log(menu_list[i]);
-                    let li = $("<li></li>");
-                    li.append(`<a
-                :href="${menu_list[i].url}" class="dropdown-toggle"
-                haschild="true"
-        >
-            <i class="menu-icon ${menu_list[i].icon}"></i>
-            <span class="menu-text"
-                  style="vertical-align: middle;"
-            > ${menu_list[i].name} </span>
-            <b class="arrow fa fa-angle-down"></b>
-        </a>
-        <b class="arrow"></b>
-`);
+                    let li;
+
                     console.log(menu_list[i].children)
                     //判断当前的menu_list有没有子元素，如果有则在当前的li中递归调用当前的方式showall
-                    if(menu_list[i].children!=undefined&&menu_list[i].children.length>0){
-                        let ul = $("<ul></ul>");
+                    if (menu_list[i].children != undefined && menu_list[i].children.length > 0) {
+                         li = $("<li data-level='2'></li>");
+
+                        li.append(`<a
+                     href="javascript:void(0);" class="dropdown-toggle"
+                    haschild="true"
+            >
+                <i class="menu-icon ${menu_list[i].icon}"></i>
+                <span class="menu-text"
+                      style="vertical-align: middle;"
+                > ${menu_list[i].name} </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>`);
+
+                        let ul = $(`<ul class="submenu nav-hide" style="display: none"></ul>`);
                         li.append(ul);
-                        this.showall(menu_list[i].children,ul);
+                        this.showall(menu_list[i].children, ul);
+                    } else {
+                         li = $("<li data-level='1'></li>");
+
+                        li.append(`<a
+                            href="${menu_list[i].url}"
+                            haschild="false"
+                    >
+                        <i class="menu-icon ${menu_list[i].icon}"></i>
+                        <span class="menu-text"
+                        > ${menu_list[i].name} </span>
+                    </a>
+                    <b class="arrow"></b>`);
+
+
                     }
                     parent.append(li);
                 }

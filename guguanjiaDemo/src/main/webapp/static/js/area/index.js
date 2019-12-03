@@ -101,7 +101,7 @@ var vm = new Vue({
         ,
         initTree: function () { //初始化ZTree
             axios({
-                url: 'manager/area'
+                url: 'manager/area/list'
             }).then(response => {
                 this.nodes = response.data;
                 this.treeObj = $.fn.zTree.init($("#treeMenu"), this.setting, this.nodes);

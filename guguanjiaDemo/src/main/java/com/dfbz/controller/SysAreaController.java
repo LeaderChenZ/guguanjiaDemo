@@ -25,7 +25,7 @@ public class SysAreaController {
     @Autowired
     SysAreaService service;
 
-    @RequestMapping("")
+    @RequestMapping("list")
     public List<SysArea> selectAll() {
         return service.selectAll();
     }

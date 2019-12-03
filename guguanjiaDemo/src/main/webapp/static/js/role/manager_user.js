@@ -81,54 +81,39 @@ var vm = new Vue({
             //
             for (let i = 0; i < this.companyUsers.length; i++) {
                 if (this.companyUsers[i].id == id) {
-                    this.companyUsers[i].show=!this.companyUsers[i].show;
-                        console.log(this.companyUsers[i].show)
+                    this.companyUsers[i].show = !this.companyUsers[i].show;
+                    console.log(this.companyUsers[i].show)
                     if (this.companyUsers[i].show) {
                         console.log(this.companyUsers[i].show)
                         this.cids.push(this.companyUsers[i].id);//将找到的需要移除人员的id放入cids中
-                        this.companyShowClass='show';//修改显示提交按钮
+                        this.companyShowClass = 'show';//修改显示提交按钮
                         return;
                     }
                 }
             }
             if ($("#dxuser input:checked").length == 0) {//如果没有任何的input被选中
-                this.companyShowClass='hide';//隐藏提交按钮
+                this.companyShowClass = 'hide';//隐藏提交按钮
 
             }
         },
-        insertUsers:function(){
-            let params = {cids:this.cids,rid:this.rid};
-                axios({
-                    url:"manager/role/insertBath",
-                    data:params,
-                    method:"post"
-                }).then(res =>{
-                    this.selectRealUser();
-                    this.companyShowClass = 'hide';
-                    layer.msg(res.data.msg)
-                }).catch(function (error) {
-                    layer.msg(error)
-                })
-        },
-        toUpdate: function (id) {
+        insertUsers: function () {
+            let params = {cids: this.cids, rid: this.rid};
             axios({
-                url: 'manager/area/toUpdate',
-                params: {areaId: id}
-            }).then(response => {
-                layer.obj = response.data;
-                let index = layer.open({
-                    type: 2,
-                    title: '区域修改',
-                    content: "html/area/save.html",
-                    area: ["80%", "80%"],
-                    end: () => {  //将then函数中的this传递到end的回调函数中
-                        this.selectAll(this.pageInfo.pageNum, this.pageInfo.pageSize);
-
-                    }
-                })
+                url: "manager/role/insertBath",
+                data: params,
+                method: "post"
+            }).then(res => {
+                this.selectRealUser();
+                this.dxUser();
+                this.companyShowClass = 'hide';
+                layer.msg(res.data.msg)
             }).catch(function (error) {
                 layer.msg(error)
             })
+        },
+        determine: function () {
+            let index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
         },
         initTree: function () { //初始化ZTree
             axios({

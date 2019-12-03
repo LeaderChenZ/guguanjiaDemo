@@ -23,6 +23,7 @@ import java.util.Map;
  * @date 2019/11/29 19
  */
 @RestController
+@RequestMapping("login")
 public class mainController {
 
     @Autowired
@@ -40,7 +41,7 @@ public class mainController {
      * @return
      */
 
-    @RequestMapping("login")
+    @RequestMapping("")
     public Result login(@RequestBody Map<String, Object> params, HttpSession session) {
         Result result = new Result();
         if (params.containsKey("code") && !StringUtils.isEmpty(params.get("code"))) {
@@ -77,4 +78,6 @@ public class mainController {
         }
         return result;
     }
+
+
 }

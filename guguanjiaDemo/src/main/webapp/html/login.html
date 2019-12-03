@@ -167,7 +167,7 @@ href="static/bootstrap/bootstrap.min.css
             changeImg: function (e) {
                 e.target.src = 'getCode.jpg?' + new Date();
             },
-            /*login: function () {
+            login: function () {
                 axios({
                     url: "login",
                     data: this.params,
@@ -175,11 +175,11 @@ href="static/bootstrap/bootstrap.min.css
                 }).then(res => {
                     //判断是否登录成功
                     if (res.data.success) {
-                        /!*
+                        /*
                         * 成功则将返回信息放入前端的状态管理中，跳转到index.html
                         * 将后台返回的key：value结构数据  转换成json串  放入到userInfo中
                         * 再讲userInfo放入前端的会话对象sessionStorage中，改sessionStorage对象是整个浏览器不关闭的时候都存在的
-                        * *!/
+                        * */
 
                         sessionStorage.setItem("userInfo", JSON.stringify(res.data.obj));
                         location.href = "html/index.html";
@@ -190,7 +190,7 @@ href="static/bootstrap/bootstrap.min.css
                 }).catch(function (error) {
                     console.log(error)
                 })
-            }*/
+            }
         }
     })
 </script>

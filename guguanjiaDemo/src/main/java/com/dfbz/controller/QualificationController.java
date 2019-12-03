@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
@@ -22,6 +23,11 @@ public class QualificationController {
 
     @Autowired
     QualificationService service;
+
+    @RequestMapping("")
+    public ModelAndView toIndex(){
+        return new ModelAndView("/html/qualification/index.html");
+    }
 
     @RequestMapping("index")
     public PageInfo<Qualification> index(@RequestBody Map<String, Object> params) {

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
@@ -20,6 +21,11 @@ import java.util.Map;
 public class WorkOrderController {
     @Autowired
     WorkOrderService service;
+
+    @RequestMapping("")
+    public ModelAndView toIndex(){
+        return new ModelAndView("/html/work/admin/index.html");
+    }
 
     @RequestMapping("work")
     public PageInfo<WorkOrder> index(@RequestBody Map<String, Object> params) {

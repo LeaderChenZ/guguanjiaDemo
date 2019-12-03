@@ -122,7 +122,7 @@
                     <li class="divider"></li>
 
                     <li>
-                        <a href="../login.html">
+                        <a href="/guguanjia/html/login.html">
                             <i class="ace-icon fa fa-power-off"></i>
                             退出
                         </a>
@@ -144,12 +144,12 @@
             //在vue对象创建的时候，进行判断   从sessionStorage中校验是否存在登录信息 ，如果没有则跳转到登录页面
             let userInfo = sessionStorage.getItem("userInfo");
             // console.log(userInfo);
-            /*if (userInfo == null) {
+            if (userInfo == null) {
                 layer.msg("请登录后访问！", {time: 500}, function () {
                     location.href = 'html/login.html';
                 })
 
-            }*/
+            }
         }
     })
 </script>

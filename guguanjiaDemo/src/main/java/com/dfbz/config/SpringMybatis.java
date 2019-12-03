@@ -1,6 +1,7 @@
 package com.dfbz.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.dfbz.interceptor.ResourceInterceptor;
 import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -17,6 +18,7 @@ import tk.mybatis.mapper.session.Configuration;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
+
 /**
  * @author Chen
  * @description mybatis配置
@@ -26,11 +28,11 @@ import java.util.Properties;
 @MapperScan(basePackages = "com.dfbz.dao")
 @ComponentScan(basePackages = "com.dfbz.service")
 @EnableTransactionManagement
-@PropertySource(value = "classpath:sys.properties",encoding = "utf-8")
-@Import({SpringRedis.class,SpringCache.class} )
+@PropertySource(value = "classpath:sys.properties", encoding = "utf-8")
+@Import({SpringRedis.class, SpringCache.class})
 public class SpringMybatis {
     @Bean
-    public DataSource getDataSource(){
+    public DataSource getDataSource() {
         Properties properties = new Properties();
         try {
             properties.load(SpringMybatis.class.getClassLoader().getResourceAsStream("db.properties"));
@@ -43,7 +45,7 @@ public class SpringMybatis {
     }
 
     @Bean
-    public SqlSessionFactory getFactory(DataSource dataSource){
+    public SqlSessionFactory getFactory(DataSource dataSource) {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         //设置数据源
         factoryBean.setDataSource(dataSource);
@@ -68,7 +70,12 @@ public class SpringMybatis {
     }
 
     @Bean
-    public DataSourceTransactionManager getTransactionManager(DataSource dataSource){
+    public DataSourceTransactionManager getTransactionManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
+    }
+
+    @Bean
+    public ResourceInterceptor getResourceInterceptor() {
+        return new ResourceInterceptor();
     }
 }

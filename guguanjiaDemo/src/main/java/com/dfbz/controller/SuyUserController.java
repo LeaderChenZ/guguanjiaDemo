@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,11 @@ import java.util.Map;
 public class SuyUserController {
     @Autowired
     SysUserService service;
+    @RequestMapping("")
+    public ModelAndView toIndex(){
+        return new ModelAndView("/html/user/user.html");
+    }
+
 
     @RequestMapping("list")
     public PageInfo<SysUser> list(@RequestBody Map<String, Object> params) {
